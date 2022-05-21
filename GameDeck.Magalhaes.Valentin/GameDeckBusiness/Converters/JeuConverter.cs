@@ -49,8 +49,8 @@ namespace GameDeckBusiness.Converters
                 EditeurId = dto.EditeurId,
                 EditeurObj = EditeurConverter.ConvertToEntity(dto.EditeurObj),
                 GenreObj = GenreConverter.ConvertToEntity(dto.GenreObj),
-                Evaluations = dto.Evaluations,
-                Experiences = dto.Experiences,
+                Evaluations = EvaluationConverter.ConvertToEntity(dto.Evaluations.ToList()),
+                Experiences = ExperienceConverter.ConvertToEntity(dto.Experiences.ToList()),
             };
         }
 
