@@ -51,12 +51,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\EvaluationConverter.cs" />
+    <Compile Include="Converters\ExperienceConverter.cs" />
+    <Compile Include="Converters\JeuConverter.cs" />
+    <Compile Include="Converters\GenreConverter.cs" />
+    <Compile Include="Converters\EditeurConverter.cs" />
+    <Compile Include="IManager.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\BaseQuery.cs" />
+    <Compile Include="Queries\EditeurQuery.cs" />
     <Compile Include="Queries\JeuQuery.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameDeckDto\GameDeckDto.csproj">
+      <Project>{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}</Project>
+      <Name>GameDeckDto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modele\Modele.csproj">
       <Project>{4367ce00-0f8a-4199-89af-cd00d53b34c2}</Project>
       <Name>Modele</Name>

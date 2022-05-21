@@ -65,6 +65,10 @@
       <Project>{C2391F9B-CC03-4DC9-8B8E-86E235B497F4}</Project>
       <Name>GameDeckBusiness</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GameDeckDto\GameDeckDto.csproj">
+      <Project>{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}</Project>
+      <Name>GameDeckDto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modele\Modele.csproj">
       <Project>{4367ce00-0f8a-4199-89af-cd00d53b34c2}</Project>
       <Name>Modele</Name>

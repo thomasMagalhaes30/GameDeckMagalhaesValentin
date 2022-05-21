@@ -44,7 +44,7 @@
     <Compile Include="EditeurDto.cs" />
     <Compile Include="EvaluationDto.cs" />
     <Compile Include="ExperienceDto.cs" />
-    <Compile Include="GenreDto - Copier.cs" />
+    <Compile Include="JeuDto.cs" />
     <Compile Include="GenreDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
