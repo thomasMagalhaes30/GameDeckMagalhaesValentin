@@ -23,7 +23,7 @@ namespace GameDeckBusiness
         /// Obtient l'instance du <see cref="Manager"/>
         /// </summary>
         public static Manager GetInstance()
-            => _instance ?? new Manager();
+            => _instance ?? (_instance = new Manager());
 
         #region methods
 
