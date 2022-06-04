@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Enum\ActionEnum.cs" />
+    <Compile Include="ViewModel\BaseVM.cs" />
+    <Compile Include="ViewModel\GameDeckDetailVM.cs" />
+    <Compile Include="ViewModel\GameDeckMasterDetailVM.cs" />
     <Compile Include="View\GameDeckDetail.xaml.cs">
       <DependentUpon>GameDeckDetail.xaml</DependentUpon>
     </Compile>
@@ -117,7 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Mock\" />
-    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameDeckDto\GameDeckDto.csproj">
+      <Project>{9c8fedb2-58f4-4e9c-b83b-d8ba88f39dde}</Project>
+      <Name>GameDeckDto</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

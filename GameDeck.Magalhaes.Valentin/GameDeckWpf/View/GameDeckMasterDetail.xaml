@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <DockPanel>
-        <local:GameDeckMaster DockPanel.Dock="Left"/>
+        <local:GameDeckMaster DockPanel.Dock="Left" MinWidth="100"/>
         <local:GameDeckDetail DockPanel.Dock="Right"/>
     </DockPanel>
 </UserControl>

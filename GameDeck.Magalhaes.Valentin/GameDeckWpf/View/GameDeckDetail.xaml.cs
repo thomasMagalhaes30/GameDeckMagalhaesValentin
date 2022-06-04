@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameDeckWpf.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace GameDeckWpf.View
         public GameDeckDetail()
         {
             InitializeComponent();
+            DataContext = new GameDeckDetailVM();
         }
     }
 }

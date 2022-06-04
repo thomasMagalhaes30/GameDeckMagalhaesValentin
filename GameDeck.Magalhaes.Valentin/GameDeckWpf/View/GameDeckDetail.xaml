@@ -3,21 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GameDeckWpf.View"
+             xmlns:local="clr-namespace:GameDeckWpf.View" xmlns:viewmodel="clr-namespace:GameDeckWpf.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel 
-        >
+    <UserControl.DataContext>
+        <viewmodel:GameDeckDetailVM></viewmodel:GameDeckDetailVM>
+    </UserControl.DataContext>
+    
+    <DockPanel >
         <!--Background="White"-->
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <!--<StackPanel.Resources>
-                    <Style TargetType="Grid">
-                        <Setter Property="Margin" Value="5"/>
-                        <Setter Property="HorizontalAlignment" Value="Left"/>
-                        <Setter Property="MinWidth" Value="100"/>
-                    </Style>
-                    <sys:Int32 x:Key="GridRightSize">75</sys:Int32>
-                </StackPanel.Resources>-->
 
             <UniformGrid Columns="2" Margin="15,5"
                              VerticalAlignment="Top"
@@ -25,29 +20,39 @@
                 <UniformGrid.Resources>
                     <Style TargetType="TextBox">
                         <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=IsReadOnly}" Value="true">-->
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsReadOnly}" Value="true">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Background" Value="{x:Null}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
                     </Style>
                 </UniformGrid.Resources>
 
                 <!--<Label FontSize="25" Margin="15" Content="oui"/>-->
                 <Label Grid.Column="0"
                        Content="Nom"/>
-                <TextBox Grid.Column="1"/>
+                <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Grid.Column="0"
                        Content="Editeur"/>
-                <TextBox Grid.Column="1"/>
+                <ComboBox Grid.Column="1"/>
 
                 <Label Grid.Column="0"
                        Content="Genre"/>
-                <TextBox Grid.Column="1"/>
+                <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Grid.Column="0"
                        Content="Date de sortie"/>
-                <TextBox Grid.Column="1"/>
+                <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <Label Grid.Row="0"
                        Content="Description"/>
-                <TextBox Grid.Row="1"/>
+                <TextBox Grid.Row="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             </UniformGrid>
 
