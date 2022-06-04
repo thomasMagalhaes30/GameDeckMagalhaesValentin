@@ -16,6 +16,6 @@ namespace GameDeckBusiness.Queries
     {
         public GenreQuery(Context context) : base(context) { }
 
-        public new void Add(Genre genre) => base.Add(genre);
+        public new Genre Add(Genre genre) => base.Add(genre);
     }
 }

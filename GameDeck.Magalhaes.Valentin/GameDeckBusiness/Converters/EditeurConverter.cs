@@ -18,11 +18,14 @@ namespace GameDeckBusiness.Converters
         /// <param name="entity">L'entite a convertir en dto</param>
         public static EditeurDto ConvertToDto(Editeur entity)
         {
+            if (entity == null)
+                return null;
+
             return new EditeurDto
             {
                 Id = entity.Id,
                 Nom = entity.Nom,
-                Jeux = JeuConverter.ConvertToDto(entity.Jeux?.ToList()),
+                //Jeux = JeuConverter.ConvertToDto(entity.Jeux?.ToList()),
             };
         }
 
@@ -32,11 +35,14 @@ namespace GameDeckBusiness.Converters
         /// <param name="dto">Le dto a convertir en entite</param>
         public static Editeur ConvertToEntity(EditeurDto dto)
         {
+            if (dto == null)
+                return null;
+
             return new Editeur
             {
                 Id = dto.Id,
                 Nom = dto.Nom,
-                Jeux = JeuConverter.ConvertToEntity(dto.Jeux?.ToList()),
+                //Jeux = JeuConverter.ConvertToEntity(dto.Jeux?.ToList()),
             };
         }
 

@@ -18,6 +18,9 @@ namespace GameDeckBusiness.Converters
         /// <param name="entity">L'entite a convertir en dto</param>
         public static JeuDto ConvertToDto(Jeu entity)
         {
+            if (entity == null)
+                return null;
+
             return new JeuDto
             {
                 Id = entity.Id,
@@ -39,6 +42,9 @@ namespace GameDeckBusiness.Converters
         /// <param name="dto">Le dto a convertir en entite</param>
         public static Jeu ConvertToEntity(JeuDto dto)
         {
+            if (dto == null)
+                return null;
+
             return new Jeu
             {
                 Id = dto.Id,
@@ -47,10 +53,10 @@ namespace GameDeckBusiness.Converters
                 DateSortie = dto.DateSortie,
                 GenreId = dto.GenreId,
                 EditeurId = dto.EditeurId,
-                EditeurObj = EditeurConverter.ConvertToEntity(dto.EditeurObj),
-                GenreObj = GenreConverter.ConvertToEntity(dto.GenreObj),
-                Evaluations = EvaluationConverter.ConvertToEntity(dto.Evaluations?.ToList()),
-                Experiences = ExperienceConverter.ConvertToEntity(dto.Experiences?.ToList()),
+                //EditeurObj = EditeurConverter.ConvertToEntity(dto.EditeurObj),
+                //GenreObj = GenreConverter.ConvertToEntity(dto.GenreObj),
+                //Evaluations = EvaluationConverter.ConvertToEntity(dto.Evaluations?.ToList()),
+                //Experiences = ExperienceConverter.ConvertToEntity(dto.Experiences?.ToList()),
             };
         }
 

@@ -19,18 +19,13 @@ namespace GameDeckBusiness.Queries
 
         public DbSet<T> GetDbSet() => _context.Set<T>();
 
-        // public List<T> GetAll() => GetDbSet().ToList();
+        public List<T> GetAll() => GetDbSet().ToList();
 
-        public List<T> GetAll()
+        protected T Add(T entity)
         {
-            var a = GetDbSet().ToList();
-            return a;
-        }
-
-        protected void Add(T entity)
-        {
-            GetDbSet().Add(entity);
+            T obj = GetDbSet().Add(entity);
             _context.SaveChanges();
+            return obj;
         }
     }
 }

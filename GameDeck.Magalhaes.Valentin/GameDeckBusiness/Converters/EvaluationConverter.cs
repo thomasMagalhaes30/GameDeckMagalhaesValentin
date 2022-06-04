@@ -18,6 +18,9 @@ namespace GameDeckBusiness.Converters
         /// <param name="entity">L'entite a convertir en dto</param>
         public static EvaluationDto ConvertToDto(Evaluation entity)
         {
+            if (entity == null)
+                return null;
+
             return new EvaluationDto
             {
                 Id = entity.Id,
@@ -35,6 +38,9 @@ namespace GameDeckBusiness.Converters
         /// <param name="dto">Le dto a convertir en entite</param>
         public static Evaluation ConvertToEntity(EvaluationDto dto)
         {
+            if (dto == null)
+                return null;
+
             return new Evaluation
             {
                 Id = dto.Id,

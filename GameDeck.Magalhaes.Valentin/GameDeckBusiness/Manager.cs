@@ -42,9 +42,9 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="EditeurDto"/>
         /// </summary>
-        public void AddEditeur(EditeurDto experience)
+        public EditeurDto AddEditeur(EditeurDto experience)
         {
-            new EditeurQuery(_context).Add(EditeurConverter.ConvertToEntity(experience));
+            return EditeurConverter.ConvertToDto(new EditeurQuery(_context).Add(EditeurConverter.ConvertToEntity(experience)));
         }
 
         /// <summary>
@@ -72,21 +72,21 @@ namespace GameDeckBusiness
         /// </summary>
         public List<EvaluationDto> GetAllEvaluations()
         {
-            throw new NotImplementedException();
+            return EvaluationConverter.ConvertToDto(new EvaluationQuery(_context).GetAll());
         }
 
         /// <summary>
         /// Permet d'ajouter un <see cref="EvaluationDto"/>
         /// </summary>
-        public void AddEvaluation(EvaluationDto experience)
+        public EvaluationDto AddEvaluation(EvaluationDto evaluation)
         {
-            throw new NotImplementedException();
+            return EvaluationConverter.ConvertToDto(new EvaluationQuery(_context).Add(EvaluationConverter.ConvertToEntity(evaluation)));
         }
 
         /// <summary>
         /// Permet de mettre à jour un <see cref="EvaluationDto"/>
         /// </summary>
-        public void UpdateEvaluation(EvaluationDto experience)
+        public void UpdateEvaluation(EvaluationDto evaluation)
         {
             throw new NotImplementedException();
         }
@@ -94,7 +94,7 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet de surprimer un <see cref="EvaluationDto"/>
         /// </summary>
-        public void DeleteEvaluation(EvaluationDto experience)
+        public void DeleteEvaluation(EvaluationDto evaluation)
         {
             throw new NotImplementedException();
         }
@@ -108,15 +108,15 @@ namespace GameDeckBusiness
         /// </summary>
         public List<ExperienceDto> GetAllExperiences()
         {
-            throw new NotImplementedException();
+            return ExperienceConverter.ConvertToDto(new ExperienceQuery(_context).GetAll());
         }
 
         /// <summary>
         /// Permet d'ajouter un <see cref="ExperienceDto"/>
         /// </summary>
-        public void AddExperience(ExperienceDto experience)
+        public ExperienceDto AddExperience(ExperienceDto experience)
         {
-            throw new NotImplementedException();
+            return ExperienceConverter.ConvertToDto(new ExperienceQuery(_context).Add(ExperienceConverter.ConvertToEntity(experience)));
         }
 
         /// <summary>
@@ -150,9 +150,9 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="GenreDto"/>
         /// </summary>
-        public void AddGenre(GenreDto genre)
+        public GenreDto AddGenre(GenreDto genre)
         {
-            new GenreQuery(_context).Add(GenreConverter.ConvertToEntity(genre));
+            return GenreConverter.ConvertToDto(new GenreQuery(_context).Add(GenreConverter.ConvertToEntity(genre)));
         }
 
         /// <summary>
@@ -186,9 +186,9 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="JeuDto"/>
         /// </summary>
-        public void AddJeu(JeuDto jeu)
+        public JeuDto AddJeu(JeuDto jeu)
         {
-            new JeuQuery(_context).Add(JeuConverter.ConvertToEntity(jeu));
+            return JeuConverter.ConvertToDto(new JeuQuery(_context).Add(JeuConverter.ConvertToEntity(jeu)));
         }
 
         /// <summary>

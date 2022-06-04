@@ -16,6 +16,11 @@ namespace GameDeckBusiness.Queries
     {
         public JeuQuery(Context context) : base(context) { }
 
-        public new void Add(Jeu jeu) => base.Add(jeu);
+        public List<Jeu> GetAllFull()
+        {
+            return GetDbSet().Include(j => j.Evaluations).Include(j => j.Experiences).ToList();
+        }
+
+        public new Jeu Add(Jeu jeu) => base.Add(jeu);
     }
 }
