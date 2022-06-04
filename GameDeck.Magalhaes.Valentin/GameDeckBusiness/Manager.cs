@@ -144,7 +144,7 @@ namespace GameDeckBusiness
         /// </summary>
         public List<GenreDto> GetAllGenres()
         {
-            throw new NotImplementedException();
+            return GenreConverter.ConvertToDto(new GenreQuery(_context).GetAll());
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace GameDeckBusiness
         /// </summary>
         public void AddGenre(GenreDto genre)
         {
-            throw new NotImplementedException();
+            new GenreQuery(_context).Add(GenreConverter.ConvertToEntity(genre));
         }
 
         /// <summary>

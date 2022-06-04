@@ -22,7 +22,7 @@ namespace GameDeckBusiness.Converters
             {
                 Id = entity.Id,
                 Nom = entity.Nom,
-                Jeux = JeuConverter.ConvertToDto(entity.Jeux.ToList()),
+                Jeux = JeuConverter.ConvertToDto(entity.Jeux?.ToList()),
             };
         }
 
@@ -36,7 +36,7 @@ namespace GameDeckBusiness.Converters
             {
                 Id = dto.Id,
                 Nom = dto.Nom,
-                Jeux = JeuConverter.ConvertToEntity(dto.Jeux.ToList()),
+                Jeux = JeuConverter.ConvertToEntity(dto.Jeux?.ToList()),
             };
         }
 

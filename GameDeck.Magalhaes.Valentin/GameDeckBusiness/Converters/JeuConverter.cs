@@ -28,8 +28,8 @@ namespace GameDeckBusiness.Converters
                 EditeurId = entity.EditeurId,
                 EditeurObj = EditeurConverter.ConvertToDto(entity.EditeurObj),
                 GenreObj = GenreConverter.ConvertToDto(entity.GenreObj),
-                Evaluations = EvaluationConverter.ConvertToDto(entity.Evaluations.ToList()),
-                Experiences = ExperienceConverter.ConvertToDto(entity.Experiences.ToList()),
+                Evaluations = EvaluationConverter.ConvertToDto(entity.Evaluations?.ToList()),
+                Experiences = ExperienceConverter.ConvertToDto(entity.Experiences?.ToList()),
             };
         }
 
@@ -49,8 +49,8 @@ namespace GameDeckBusiness.Converters
                 EditeurId = dto.EditeurId,
                 EditeurObj = EditeurConverter.ConvertToEntity(dto.EditeurObj),
                 GenreObj = GenreConverter.ConvertToEntity(dto.GenreObj),
-                Evaluations = EvaluationConverter.ConvertToEntity(dto.Evaluations.ToList()),
-                Experiences = ExperienceConverter.ConvertToEntity(dto.Experiences.ToList()),
+                Evaluations = EvaluationConverter.ConvertToEntity(dto.Evaluations?.ToList()),
+                Experiences = ExperienceConverter.ConvertToEntity(dto.Experiences?.ToList()),
             };
         }
 

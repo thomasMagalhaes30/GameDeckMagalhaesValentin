@@ -10,7 +10,7 @@ namespace Modele
         public Context() : base("name=ConnexionString")
         {
             // A remplacer par DropCreateDatabaseIfModelChanges puis par null
-            Database.SetInitializer(new DropCreateDatabaseAlways<Context>());
+            Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
         }
 
         public DbSet<Editeur> Editeurs { get; set; }
