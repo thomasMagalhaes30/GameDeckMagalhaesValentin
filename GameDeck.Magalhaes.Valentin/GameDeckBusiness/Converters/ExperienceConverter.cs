@@ -1,5 +1,6 @@
 ﻿using GameDeckDto;
 using Modele.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,11 +19,14 @@ namespace GameDeckBusiness.Converters
         /// <param name="entity">L'entite a convertir en dto</param>
         public static ExperienceDto ConvertToDto(Experience entity)
         {
+            if (entity == null)
+                return null;
+
             return new ExperienceDto
             {
                 Id = entity.Id,
                 Joueur = entity.Joueur,
-                TempsJeu = entity.TempsJeu,
+                TempsJeu = TimeSpan.FromSeconds(entity.TempsJeu),
                 Pourcentage = entity.Pourcentage,
                 JeuId = entity.JeuId,
                 //JeuObj = JeuConverter.ConvertToDto(entity.JeuObj),
@@ -35,11 +39,14 @@ namespace GameDeckBusiness.Converters
         /// <param name="dto">Le dto a convertir en entite</param>
         public static Experience ConvertToEntity(ExperienceDto dto)
         {
+            if (dto == null)
+                return null;
+
             return new Experience
             {
                 Id = dto.Id,
                 Joueur = dto.Joueur,
-                TempsJeu = dto.TempsJeu,
+                TempsJeu = dto.TempsJeu.TotalSeconds,
                 Pourcentage = dto.Pourcentage,
                 JeuId = dto.JeuId,
                 //JeuObj = JeuConverter.ConvertToEntity(dto.JeuObj),

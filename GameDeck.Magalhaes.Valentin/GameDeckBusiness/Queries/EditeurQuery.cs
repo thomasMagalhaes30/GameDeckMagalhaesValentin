@@ -16,6 +16,6 @@ namespace GameDeckBusiness.Queries
     {
         public EditeurQuery(Context context) : base(context) { }
 
-        public new void Add(Editeur editeur) => base.Add(editeur);
+        public new Editeur Add(Editeur editeur) => base.Add(editeur);
     }
 }

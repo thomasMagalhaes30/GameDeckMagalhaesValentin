@@ -16,6 +16,6 @@ namespace GameDeckBusiness.Queries
     {
         public JeuQuery(Context context) : base(context) { }
 
-        public new void Add(Jeu jeu) => base.Add(jeu);
+        public new Jeu Add(Jeu jeu) => base.Add(jeu);
     }
 }

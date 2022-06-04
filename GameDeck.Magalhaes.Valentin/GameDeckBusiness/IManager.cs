@@ -21,7 +21,7 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="EditeurDto"/>
         /// </summary>
-        void AddEditeur(EditeurDto experience);
+        EditeurDto AddEditeur(EditeurDto experience);
 
         /// <summary>
         /// Permet de mettre à jour un <see cref="EditeurDto"/>
@@ -45,17 +45,17 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="EvaluationDto"/>
         /// </summary>
-        void AddEvaluation(EvaluationDto experience);
+        EvaluationDto AddEvaluation(EvaluationDto evaluation);
 
         /// <summary>
         /// Permet de mettre à jour un <see cref="EvaluationDto"/>
         /// </summary>
-        void UpdateEvaluation(EvaluationDto experience);
+        void UpdateEvaluation(EvaluationDto evaluation);
 
         /// <summary>
         /// Permet de surprimer un <see cref="EvaluationDto"/>
         /// </summary>
-        void DeleteEvaluation(EvaluationDto experience);
+        void DeleteEvaluation(EvaluationDto evaluation);
 
         #endregion
 
@@ -69,7 +69,7 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="ExperienceDto"/>
         /// </summary>
-        void AddExperience(ExperienceDto experience);
+        ExperienceDto AddExperience(ExperienceDto experience);
 
         /// <summary>
         /// Permet de mettre à jour un <see cref="ExperienceDto"/>
@@ -93,7 +93,7 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="GenreDto"/>
         /// </summary>
-        void AddGenre(GenreDto genre);
+        GenreDto AddGenre(GenreDto genre);
 
         /// <summary>
         /// Permet de mettre à jour un <see cref="GenreDto"/>
@@ -117,7 +117,7 @@ namespace GameDeckBusiness
         /// <summary>
         /// Permet d'ajouter un <see cref="JeuDto"/>
         /// </summary>
-        void AddJeu(JeuDto jeu);
+        JeuDto AddJeu(JeuDto jeu);
 
         /// <summary>
         /// Permet de mettre à jour un <see cref="JeuDto"/>

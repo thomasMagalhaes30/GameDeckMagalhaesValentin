@@ -1,5 +1,6 @@
 ﻿using Modele.Entities;
 using Modele.Mappings;
+using System;
 using System.Data.Entity;
 using System.Reflection;
 
@@ -10,7 +11,7 @@ namespace Modele
         public Context() : base("name=ConnexionString")
         {
             // A remplacer par DropCreateDatabaseIfModelChanges puis par null
-            Database.SetInitializer(new DropCreateDatabaseAlways<Context>());
+            Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
         }
 
         public DbSet<Editeur> Editeurs { get; set; }

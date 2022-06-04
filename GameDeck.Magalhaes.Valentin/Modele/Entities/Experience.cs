@@ -20,7 +20,8 @@ namespace Modele.Entities
         /// <summary>
         /// Obtient ou definit le temps de jeu de l'<see cref="Experience"/>.
         /// </summary>
-        public TimeSpan TempsJeu { get; set; }
+        /// <remarks>Total en secondes</remarks>
+        public double TempsJeu { get; set; }
 
         /// <summary>
         /// Obtient ou definit le pourcentage de l'<see cref="Experience"/>.
