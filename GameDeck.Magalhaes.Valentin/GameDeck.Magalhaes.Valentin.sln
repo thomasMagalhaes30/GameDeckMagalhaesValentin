@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDeckBusiness", "GameDec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDeckDto", "GameDeckDto\GameDeckDto.csproj", "{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameDeckWpf", "GameDeckWpf\GameDeckWpf.csproj", "{DCDDEE57-39F9-480E-B0E4-D1DFC576EE34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDDEE57-39F9-480E-B0E4-D1DFC576EE34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDDEE57-39F9-480E-B0E4-D1DFC576EE34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDDEE57-39F9-480E-B0E4-D1DFC576EE34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDDEE57-39F9-480E-B0E4-D1DFC576EE34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
