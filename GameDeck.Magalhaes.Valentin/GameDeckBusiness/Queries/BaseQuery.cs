@@ -6,7 +6,7 @@ using System.Linq;
 namespace GameDeckBusiness.Queries
 {
     /// <summary>
-    /// Represente la classe de base des queries
+    /// Represente la classe de base des requêtes
     /// </summary>
     internal class BaseQuery<T> where T : class
     {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GameDeckBusiness.Queries
 {
     /// <summary>
-    /// 
+    /// Represente la classe de requête de l'<see cref="Editeur"/>.
     /// </summary>
     internal class EditeurQuery : BaseQuery<Editeur>
     {

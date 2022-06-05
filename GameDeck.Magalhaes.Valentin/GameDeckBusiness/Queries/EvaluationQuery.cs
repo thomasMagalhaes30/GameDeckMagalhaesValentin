@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GameDeckBusiness.Queries
 {
     /// <summary>
-    /// 
+    /// Represente la classe de requête de l'<see cref="Evaluation"/>.
     /// </summary>
     internal class EvaluationQuery : BaseQuery<Evaluation>
     {
