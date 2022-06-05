@@ -5,13 +5,8 @@ namespace Modele.Entities
     /// <summary>
     /// Represente une <see cref="Experience"/> (APP_EXPERIENCE).
     /// </summary>
-    public class Experience
+    public class Experience : BaseEntity
     {
-        /// <summary>
-        /// Obtient ou definit l'identifiant de l'<see cref="Experience"/>.
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Obtient ou definit le joueur de l'<see cref="Experience"/>.
         /// </summary>

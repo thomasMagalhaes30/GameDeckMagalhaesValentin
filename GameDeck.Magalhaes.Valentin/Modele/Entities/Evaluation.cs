@@ -5,13 +5,8 @@ namespace Modele.Entities
     /// <summary>
     /// Represente une <see cref="Evaluation"/> (APP_EVALUATION).
     /// </summary>
-    public class Evaluation
+    public class Evaluation : BaseEntity
     {
-        /// <summary>
-        /// Obtient ou definit l'identifiant de l'<see cref="Evaluation"/>.
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Obtient ou definit le nom de l'evaluateur de l'<see cref="Evaluation"/>.
         /// </summary>

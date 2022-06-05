@@ -1,4 +1,5 @@
 ﻿using Modele;
+using Modele.Entities;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace GameDeckBusiness.Queries
     /// <summary>
     /// Represente la classe de base des requêtes
     /// </summary>
-    internal class BaseQuery<T> where T : class
+    internal abstract class BaseQuery<T> where T : BaseEntity
     {
-        private Context _context = null;
+        protected readonly Context _context = null;
 
         public BaseQuery(Context context)
         {

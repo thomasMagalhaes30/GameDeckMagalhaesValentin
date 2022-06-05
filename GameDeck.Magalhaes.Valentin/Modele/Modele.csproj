@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Experience.cs" />
     <Compile Include="Entities\Evaluation.cs" />
     <Compile Include="Entities\Editeur.cs" />

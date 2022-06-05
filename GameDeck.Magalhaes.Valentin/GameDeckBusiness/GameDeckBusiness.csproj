@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\EvaluationCommand.cs" />
+    <Compile Include="Commands\EditeurCommand.cs" />
+    <Compile Include="Commands\ExperienceCommand.cs" />
+    <Compile Include="Commands\JeuCommand.cs" />
+    <Compile Include="Commands\GenreCommand.cs" />
     <Compile Include="Converters\EvaluationConverter.cs" />
     <Compile Include="Converters\ExperienceConverter.cs" />
     <Compile Include="Converters\JeuConverter.cs" />
@@ -80,9 +86,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -6,13 +6,8 @@ namespace Modele.Entities
     /// <summary>
     /// Represente un <see cref="Jeu"/> (APP_JEU).
     /// </summary>
-    public class Jeu
+    public class Jeu : BaseEntity
     {
-        /// <summary>
-        /// Obtient ou definit l'identifiant du <see cref="Jeu"/>.
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Obtient ou definit le nom du <see cref="Jeu"/>.
         /// </summary>

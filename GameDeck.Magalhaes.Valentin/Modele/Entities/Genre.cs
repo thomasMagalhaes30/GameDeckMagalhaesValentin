@@ -5,13 +5,8 @@ namespace Modele.Entities
     /// <summary>
     /// Represente un <see cref="Genre"/> (APP_GENRE).
     /// </summary>
-    public class Genre
+    public class Genre : BaseEntity
     {
-        /// <summary>
-        /// Obtient ou definit l'identifiant du <see cref="Genre"/>.
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Obtient ou definit le nom du <see cref="Genre"/>.
         /// </summary>
