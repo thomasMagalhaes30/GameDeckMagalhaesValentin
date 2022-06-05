@@ -15,7 +15,5 @@ namespace GameDeckBusiness.Queries
     internal class GenreQuery : BaseQuery<Genre>
     {
         public GenreQuery(Context context) : base(context) { }
-
-        public new Genre Add(Genre genre) => base.Add(genre);
     }
 }

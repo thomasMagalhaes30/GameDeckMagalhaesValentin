@@ -19,8 +19,8 @@ namespace GameDeckConsole
                 // GENRE
                 var g1 = new GenreDto { Nom = "Course" };
                 var g2 = new GenreDto { Nom = "Aventure" };
-                g1 = Manager.GetInstance().AddGenre(g1);
-                g2 = Manager.GetInstance().AddGenre(g2);
+                g1.Id = Manager.GetInstance().AddGenre(g1);
+                g2.Id = Manager.GetInstance().AddGenre(g2);
                 // lecture des genres
                 Console.WriteLine("\nListe de mes genres : ");
                 Manager.GetInstance().GetAllGenres().ForEach(g => Console.WriteLine("Genre n°{0} : {1}", g.Id, g.Nom));
@@ -29,14 +29,15 @@ namespace GameDeckConsole
                 // EDITEUR
                 var ed1 = new EditeurDto { Nom = "Nintendo" };
                 var ed2 = new EditeurDto { Nom = "Ubisoft" };
-                ed1 = Manager.GetInstance().AddEditeur(ed1);
-                ed2 = Manager.GetInstance().AddEditeur(ed2);
+                ed1.Id = Manager.GetInstance().AddEditeur(ed1);
+                ed2.Id = Manager.GetInstance().AddEditeur(ed2);
                 // lecture des editeur
                 Console.WriteLine("\nListe de mes éditeurs : ");
                 Manager.GetInstance().GetAllEditeurs().ForEach(e => Console.WriteLine("Editeur n°{0} : {1}", e.Id, e.Nom));
                 Console.WriteLine("...Fin...");
 
                 // JEUX
+                Console.WriteLine("Ajout des jeux");
                 var j1 = new JeuDto {
                     Nom = "Tracmania",
                     Description = "Jeu de voiture créer par nadéo",
@@ -51,20 +52,22 @@ namespace GameDeckConsole
                     GenreId = g2.Id,
                     EditeurId = ed2.Id
                 };
-                j1 = Manager.GetInstance().AddJeu(j1);
-                j2 = Manager.GetInstance().AddJeu(j2);
+                j1.Id = Manager.GetInstance().AddJeu(j1);
+                j2.Id = Manager.GetInstance().AddJeu(j2);
 
                 // EVALUATION
+                Console.WriteLine("Ajout des évaluations");
                 var eval1 = new EvaluationDto { NomEvaluateur = "Guillaume", Date = new DateTime(2022, 6, 4, 9, 54, 10), Note = 14.7f, JeuId = j1.Id };
                 var eval2 = new EvaluationDto { NomEvaluateur = "Thomas", Date = new DateTime(2022, 6, 4, 9, 55, 30), Note = 18.5f, JeuId = j1.Id };
-                eval1 = Manager.GetInstance().AddEvaluation(eval1);
-                eval2 = Manager.GetInstance().AddEvaluation(eval2);
+                eval1.Id = Manager.GetInstance().AddEvaluation(eval1);
+                eval2.Id = Manager.GetInstance().AddEvaluation(eval2);
 
                 // EXPERIENCE
+                Console.WriteLine("Ajout des expériences");
                 var exp1 = new ExperienceDto { Joueur = "Guillaume", TempsJeu = new TimeSpan(5, 6, 13), Pourcentage = 1f, JeuId = j1.Id };
                 var exp2 = new ExperienceDto { Joueur = "Thomas", TempsJeu = new TimeSpan(32, 45, 30), Pourcentage = 2f, JeuId = j1.Id };
-                exp1 = Manager.GetInstance().AddExperience(exp1);
-                exp2 = Manager.GetInstance().AddExperience(exp2);
+                exp1.Id = Manager.GetInstance().AddExperience(exp1);
+                exp2.Id = Manager.GetInstance().AddExperience(exp2);
 
                 // lecture des jeux
                 Console.WriteLine("\nListe de mes jeux : ");

@@ -19,6 +19,8 @@ namespace GameDeckBusiness.Commands
 
         public DbSet<T> GetDbSet() => _context.Set<T>();
 
+        #region public methods
+
         /// <summary>
         /// Obtient l'entite qui possède l'identifiant passé en paramètre
         /// </summary>
@@ -36,9 +38,9 @@ namespace GameDeckBusiness.Commands
         /// <returns>Identifiant de l'entite ajouté</returns>
         public int Add(T entite)
         {
-            int id = GetDbSet().Add(entite).Id;
+            GetDbSet().Add(entite);
             _context.SaveChanges();
-            return id;
+            return entite.Id; // oui oui c'est bien comme ça
         }
 
         /// <summary>
@@ -55,5 +57,7 @@ namespace GameDeckBusiness.Commands
             // on sauvegarde que si on retire l'entite
             _context.SaveChanges();
         }
+
+        #endregion
     }
 }

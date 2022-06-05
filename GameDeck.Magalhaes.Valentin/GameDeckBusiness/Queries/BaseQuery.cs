@@ -20,13 +20,21 @@ namespace GameDeckBusiness.Queries
 
         public DbSet<T> GetDbSet() => _context.Set<T>();
 
-        public List<T> GetAll() => GetDbSet().ToList();
+        #region public methods
 
-        protected T Add(T entity)
-        {
-            T obj = GetDbSet().Add(entity);
-            _context.SaveChanges();
-            return obj;
-        }
+        /// <summary>
+        /// Obtient tous les entites <see cref="T"/>
+        /// </summary>
+        /// <returns>IQueryable de <see cref="T"/></returns>
+        public IQueryable<T> GetAll() => GetDbSet();
+
+        /// <summary>
+        /// Obtient l'entite  <see cref="T"/> par son Id
+        /// </summary>
+        /// <param name="id">Identifiant de l'entite <see cref="T"/> à récupérer</param>
+        /// <returns>IQueryable de <see cref="T"/></returns>
+        public IQueryable<T> GetById(int id) => GetDbSet().Where(entite => entite.Id == id);
+
+        #endregion
     }
 }

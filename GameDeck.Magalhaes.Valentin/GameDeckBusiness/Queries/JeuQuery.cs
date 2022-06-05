@@ -15,7 +15,5 @@ namespace GameDeckBusiness.Queries
     internal class JeuQuery : BaseQuery<Jeu>
     {
         public JeuQuery(Context context) : base(context) { }
-
-        public new Jeu Add(Jeu jeu) => base.Add(jeu);
     }
 }

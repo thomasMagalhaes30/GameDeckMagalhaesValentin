@@ -15,7 +15,5 @@ namespace GameDeckBusiness.Queries
     internal class EvaluationQuery : BaseQuery<Evaluation>
     {
         public EvaluationQuery(Context context) : base(context) { }
-
-        public new Evaluation Add(Evaluation evaluation) => base.Add(evaluation);
     }
 }

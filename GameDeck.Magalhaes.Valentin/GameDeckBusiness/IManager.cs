@@ -14,120 +14,180 @@ namespace GameDeckBusiness
         #region methods Editeur
 
         /// <summary>
-        /// Obtient la liste des <see cref="EditeurDto"/>
+        /// Obtient une liste d'<see cref="EditeurDto"/>.
         /// </summary>
+        /// <returns>Une liste d'<see cref="EditeurDto"/>.</returns>
         List<EditeurDto> GetAllEditeurs();
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="EditeurDto"/>
+        /// Obtient un <see cref="EditeurDto"/> par son identifiant.
         /// </summary>
-        EditeurDto AddEditeur(EditeurDto experience);
+        /// <param name="id">L'identifiant de l'editeur.</param>
+        /// <returns>Un <see cref="EditeurDto"/>.</returns>
+        EditeurDto GetOneEditeur(int id);
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="EditeurDto"/>
+        /// Ajoute un editeur.
         /// </summary>
-        void UpdateEditeur(EditeurDto experience);
+        /// <param name="editeur">L'editeur à ajouter.</param>
+        /// <returns>L'identifiant de l'editeur crée.</returns>
+        int AddEditeur(EditeurDto editeur);
 
         /// <summary>
-        /// Permet de surprimer un <see cref="EditeurDto"/>
+        /// Met à jour un editeur.
         /// </summary>
-        void DeleteEditeur(EditeurDto experience);
+        /// <param name="editeur">L'editeur à modifier.</param>
+        void UpdateEditeur(EditeurDto editeur);
+
+        /// <summary>
+        /// Supprime un editeur par son identifiant.
+        /// </summary>
+        /// <param name="id">Identifiant de l'editeur à supprimer.</param>
+        void DeleteEditeur(int id);
 
         #endregion
 
         #region methods Evaluation
 
         /// <summary>
-        /// Obtient la liste des <see cref="EvaluationDto"/>
+        /// Obtient une liste d'<see cref"EvaluationDto"/>.
         /// </summary>
+        /// <returns>Une liste d'<see cref"EvaluationDto"/>.</returns>
         List<EvaluationDto> GetAllEvaluations();
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="EvaluationDto"/>
+        /// Obtient une <see cref="EvaluationDto"/> par son identifiant.
         /// </summary>
-        EvaluationDto AddEvaluation(EvaluationDto evaluation);
+        /// <param name="id">L'identifiant de l'evaluation.</param>
+        /// <returns>Une <see cref="EvaluationDto"/>.</returns>
+        EvaluationDto GetOneEvaluation(int id);
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="EvaluationDto"/>
+        /// Ajoute une evaluation.
         /// </summary>
+        /// <param name="evaluation">L'evaluation à ajouter.</param>
+        /// <returns>L'identifiant de l'evaluation crée.</returns>
+        int AddEvaluation(EvaluationDto evaluation);
+
+        /// <summary>
+        /// Met à jour une evaluation.
+        /// </summary>
+        /// <param name="evaluation">L'evaluation à modifier.</param>
         void UpdateEvaluation(EvaluationDto evaluation);
 
         /// <summary>
-        /// Permet de surprimer un <see cref="EvaluationDto"/>
+        /// Supprime une evaluation par son identifiant.
         /// </summary>
-        void DeleteEvaluation(EvaluationDto evaluation);
+        /// <param name="id">Identifiant de l'evaluation à supprimer.</param>
+        void DeleteEvaluation(int id);
 
         #endregion
 
         #region methods Experience
 
         /// <summary>
-        /// Obtient la liste des <see cref="ExperienceDto"/>
+        /// Obtient une liste d'<see cref="ExperienceDto"/>.
         /// </summary>
+        /// <returns>Une liste d'<see cref="ExperienceDto"/>.</returns>
         List<ExperienceDto> GetAllExperiences();
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="ExperienceDto"/>
+        /// Obtient une <see cref="ExperienceDto"/> par son identifiant.
         /// </summary>
-        ExperienceDto AddExperience(ExperienceDto experience);
+        /// <param name="id">L'identifiant de l'experience.</param>
+        /// <returns>Une <see cref="ExperienceDto"/>.</returns>
+        ExperienceDto GetOneExperience(int id);
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="ExperienceDto"/>
+        /// Ajoute une experience.
         /// </summary>
+        /// <param name="experience">L'experience à ajouter.</param>
+        /// <returns>L'identifiant de l'experience crée.</returns>
+        int AddExperience(ExperienceDto experience);
+
+        /// <summary>
+        /// Met à jour une experience.
+        /// </summary>
+        /// <param name="experience">L'experience à modifier.</param>
         void UpdateExperience(ExperienceDto experience);
 
         /// <summary>
-        /// Permet de surprimer un <see cref="ExperienceDto"/>
+        /// Supprime une experience par son identifiant.
         /// </summary>
-        void DeleteExperience(ExperienceDto experience);
+        /// <param name="id">Identifiant de l'experience à supprimer.</param>
+        void DeleteExperience(int id);
 
         #endregion
 
         #region methods Genre
 
         /// <summary>
-        /// Obtient la liste des <see cref="GenreDto"/>
+        /// Obtient une liste de <see cref="GenreDto"/>.
         /// </summary>
+        /// <returns>Une liste de <see cref="GenreDto"/>.</returns>
         List<GenreDto> GetAllGenres();
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="GenreDto"/>
+        /// Obtient un <see cref="GenreDto"/> par son identifiant.
         /// </summary>
-        GenreDto AddGenre(GenreDto genre);
+        /// <param name="id">L'identifiant du genre.</param>
+        /// <returns>Un <see cref="GenreDto"/>.</returns>
+        GenreDto GetOneGenre(int id);
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="GenreDto"/>
+        /// Ajoute un genre.
         /// </summary>
+        /// <param name="genre">Le genre à ajouter.</param>
+        /// <returns>L'identifiant du genre crée.</returns>
+        int AddGenre(GenreDto genre);
+
+        /// <summary>
+        /// Met à jour un genre.
+        /// </summary>
+        /// <param name="genre">Le genre à modifier.</param>
         void UpdateGenre(GenreDto genre);
 
         /// <summary>
-        /// Permet de surprimer un <see cref="GenreDto"/>
+        /// Supprime un genre par son identifiant.
         /// </summary>
-        void DeleteGenre(GenreDto genre);
+        /// <param name="id">Identifiant du genre à supprimer.</param>
+        void DeleteGenre(int id);
 
         #endregion
 
         #region methods Jeu
 
         /// <summary>
-        /// Obtient la liste des <see cref="JeuDto"/>
+        /// Obtient une liste de <see cref="JeuDto"/>.
         /// </summary>
+        /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
         List<JeuDto> GetAllJeux();
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="JeuDto"/>
+        /// Obtient un <see cref="JeuDto"/> par son identifiant.
         /// </summary>
-        JeuDto AddJeu(JeuDto jeu);
+        /// <param name="id">L'identifiant du jeu.</param>
+        /// <returns>Un <see cref="JeuDto"/>.</returns>
+        JeuDto GetOneJeu(int id);
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="JeuDto"/>
+        /// Ajoute un jeu.
         /// </summary>
+        /// <param name="jeu">Le jeu à ajouter.</param>
+        /// <returns>L'identifiant du jeu crée.</returns>
+        int AddJeu(JeuDto jeu);
+
+        /// <summary>
+        /// Met à jour un jeu.
+        /// </summary>
+        /// <param name="jeu">Le jeu à modifier.</param>
         void UpdateJeu(JeuDto jeu);
 
         /// <summary>
-        /// Permet de surprimer un <see cref="JeuDto"/>
+        /// Supprime un jeu par son identifiant.
         /// </summary>
-        void DeleteJeu(JeuDto jeu);
+        /// <param name="id">Identifiant du jeu à supprimer.</param>
+        void DeleteJeu(int id);
 
         #endregion
     }

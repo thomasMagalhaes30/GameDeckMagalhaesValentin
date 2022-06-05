@@ -1,10 +1,12 @@
-﻿using GameDeckBusiness.Converters;
+﻿using GameDeckBusiness.Commands;
+using GameDeckBusiness.Converters;
 using GameDeckBusiness.Queries;
 using GameDeckDto;
 using Modele;
 using Modele.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GameDeckBusiness
 {
@@ -28,39 +30,61 @@ namespace GameDeckBusiness
         public static Manager GetInstance()
             => _instance ?? (_instance = new Manager());
 
-
         #region methods Editeur
 
         /// <summary>
-        /// Obtient la liste des <see cref="EditeurDto"/>
+        /// Obtient une liste d'<see cref="EditeurDto"/>.
         /// </summary>
+        /// <returns>Une liste d'<see cref="EditeurDto"/>.</returns>
         public List<EditeurDto> GetAllEditeurs()
         {
-            return EditeurConverter.ConvertToDto(new EditeurQuery(_context).GetAll());
+            return EditeurConverter.ConvertToDto(
+                new EditeurQuery(_context).GetAll().ToList()
+            );
         }
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="EditeurDto"/>
+        /// Obtient un <see cref="EditeurDto"/> par son identifiant.
         /// </summary>
-        public EditeurDto AddEditeur(EditeurDto experience)
+        /// <param name="id">L'identifiant de l'editeur.</param>
+        /// <returns>Un <see cref="EditeurDto"/>.</returns>
+        public EditeurDto GetOneEditeur(int id)
         {
-            return EditeurConverter.ConvertToDto(new EditeurQuery(_context).Add(EditeurConverter.ConvertToEntity(experience)));
+            return EditeurConverter.ConvertToDto(
+                 new EditeurQuery(_context).GetById(id).FirstOrDefault()
+             );
         }
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="EditeurDto"/>
+        /// Ajoute un editeur.
         /// </summary>
-        public void UpdateEditeur(EditeurDto experience)
+        /// <param name="editeur">L'editeur à ajouter.</param>
+        /// <returns>L'identifiant de l'editeur crée.</returns>
+        public int AddEditeur(EditeurDto editeur)
         {
-            throw new NotImplementedException();
+            return new EditeurCommand(_context).Add(
+                EditeurConverter.ConvertToEntity(editeur)
+            );
         }
 
         /// <summary>
-        /// Permet de surprimer un <see cref="EditeurDto"/>
+        /// Met à jour un editeur.
         /// </summary>
-        public void DeleteEditeur(EditeurDto experience)
+        /// <param name="editeur">L'editeur à modifier.</param>
+        public void UpdateEditeur(EditeurDto editeur)
         {
-            throw new NotImplementedException();
+            new EditeurCommand(_context).Update(
+                 EditeurConverter.ConvertToEntity(editeur)
+            );
+        }
+
+        /// <summary>
+        /// Supprime un editeur par son identifiant.
+        /// </summary>
+        /// <param name="id">Identifiant de l'editeur à supprimer.</param>
+        public void DeleteEditeur(int id)
+        {
+            new EditeurCommand(_context).Delete(id);
         }
 
         #endregion
@@ -68,35 +92,58 @@ namespace GameDeckBusiness
         #region methods Evaluation
 
         /// <summary>
-        /// Obtient la liste des <see cref="EvaluationDto"/>
+        /// Obtient une liste d'<see cref"EvaluationDto"/>.
         /// </summary>
+        /// <returns>Une liste d'<see cref"EvaluationDto"/>.</returns>
         public List<EvaluationDto> GetAllEvaluations()
         {
-            return EvaluationConverter.ConvertToDto(new EvaluationQuery(_context).GetAll());
+            return EvaluationConverter.ConvertToDto(
+                new EvaluationQuery(_context).GetAll().ToList()
+            );
         }
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="EvaluationDto"/>
+        /// Obtient une <see cref="EvaluationDto"/> par son identifiant.
         /// </summary>
-        public EvaluationDto AddEvaluation(EvaluationDto evaluation)
+        /// <param name="id">L'identifiant de l'evaluation.</param>
+        /// <returns>Une <see cref="EvaluationDto"/>.</returns>
+        public EvaluationDto GetOneEvaluation(int id)
         {
-            return EvaluationConverter.ConvertToDto(new EvaluationQuery(_context).Add(EvaluationConverter.ConvertToEntity(evaluation)));
+            return EvaluationConverter.ConvertToDto(
+                 new EvaluationQuery(_context).GetById(id).FirstOrDefault()
+             );
         }
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="EvaluationDto"/>
+        /// Ajoute une evaluation.
         /// </summary>
+        /// <param name="evaluation">L'evaluation à ajouter.</param>
+        /// <returns>L'identifiant de l'evaluation crée.</returns>
+        public int AddEvaluation(EvaluationDto evaluation)
+        {
+            return new EvaluationCommand(_context).Add(
+                EvaluationConverter.ConvertToEntity(evaluation)
+            );
+        }
+
+        /// <summary>
+        /// Met à jour une evaluation.
+        /// </summary>
+        /// <param name="evaluation">L'evaluation à modifier.</param>
         public void UpdateEvaluation(EvaluationDto evaluation)
         {
-            throw new NotImplementedException();
+            new EvaluationCommand(_context).Update(
+                EvaluationConverter.ConvertToEntity(evaluation)
+            );
         }
 
         /// <summary>
-        /// Permet de surprimer un <see cref="EvaluationDto"/>
+        /// Supprime une evaluation par son identifiant.
         /// </summary>
-        public void DeleteEvaluation(EvaluationDto evaluation)
+        /// <param name="id">Identifiant de l'evaluation à supprimer.</param>
+        public void DeleteEvaluation(int id)
         {
-            throw new NotImplementedException();
+            new EvaluationCommand(_context).Delete(id);
         }
 
         #endregion
@@ -104,35 +151,58 @@ namespace GameDeckBusiness
         #region methods Experience
 
         /// <summary>
-        /// Obtient la liste des <see cref="ExperienceDto"/>
+        /// Obtient une liste d'<see cref="ExperienceDto"/>.
         /// </summary>
+        /// <returns>Une liste d'<see cref="ExperienceDto"/>.</returns>
         public List<ExperienceDto> GetAllExperiences()
         {
-            return ExperienceConverter.ConvertToDto(new ExperienceQuery(_context).GetAll());
+            return ExperienceConverter.ConvertToDto(
+                new ExperienceQuery(_context).GetAll().ToList()
+            );
         }
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="ExperienceDto"/>
+        /// Obtient une <see cref="ExperienceDto"/> par son identifiant.
         /// </summary>
-        public ExperienceDto AddExperience(ExperienceDto experience)
+        /// <param name="id">L'identifiant de l'experience.</param>
+        /// <returns>Une <see cref="ExperienceDto"/>.</returns>
+        public ExperienceDto GetOneExperience(int id)
         {
-            return ExperienceConverter.ConvertToDto(new ExperienceQuery(_context).Add(ExperienceConverter.ConvertToEntity(experience)));
+            return ExperienceConverter.ConvertToDto(
+                 new ExperienceQuery(_context).GetById(id).FirstOrDefault()
+             );
         }
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="ExperienceDto"/>
+        /// Ajoute une experience.
         /// </summary>
+        /// <param name="experience">L'experience à ajouter.</param>
+        /// <returns>L'identifiant de l'experience crée.</returns>
+        public int AddExperience(ExperienceDto experience)
+        {
+            return new ExperienceCommand(_context).Add(
+                ExperienceConverter.ConvertToEntity(experience)
+            );
+        }
+
+        /// <summary>
+        /// Met à jour une experience.
+        /// </summary>
+        /// <param name="experience">L'experience à modifier.</param>
         public void UpdateExperience(ExperienceDto experience)
         {
-            throw new NotImplementedException();
+            new ExperienceCommand(_context).Update(
+                ExperienceConverter.ConvertToEntity(experience)
+            );
         }
 
         /// <summary>
-        /// Permet de surprimer un <see cref="ExperienceDto"/>
+        /// Supprime une experience par son identifiant.
         /// </summary>
-        public void DeleteExperience(ExperienceDto experience)
+        /// <param name="id">Identifiant de l'experience à supprimer.</param>
+        public void DeleteExperience(int id)
         {
-            throw new NotImplementedException();
+            new ExperienceCommand(_context).Delete(id);
         }
 
         #endregion
@@ -140,35 +210,58 @@ namespace GameDeckBusiness
         #region methods Genre
 
         /// <summary>
-        /// Obtient la liste des <see cref="GenreDto"/>
+        /// Obtient une liste de <see cref="GenreDto"/>.
         /// </summary>
+        /// <returns>Une liste de <see cref="GenreDto"/>.</returns>
         public List<GenreDto> GetAllGenres()
         {
-            return GenreConverter.ConvertToDto(new GenreQuery(_context).GetAll());
+            return GenreConverter.ConvertToDto(
+                new GenreQuery(_context).GetAll().ToList()
+            );
         }
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="GenreDto"/>
+        /// Obtient un <see cref="GenreDto"/> par son identifiant.
         /// </summary>
-        public GenreDto AddGenre(GenreDto genre)
+        /// <param name="id">L'identifiant du genre.</param>
+        /// <returns>Un <see cref="GenreDto"/>.</returns>
+        public GenreDto GetOneGenre(int id)
         {
-            return GenreConverter.ConvertToDto(new GenreQuery(_context).Add(GenreConverter.ConvertToEntity(genre)));
+            return GenreConverter.ConvertToDto(
+                 new GenreQuery(_context).GetById(id).FirstOrDefault()
+             );
         }
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="GenreDto"/>
+        /// Ajoute un genre.
         /// </summary>
+        /// <param name="genre">Le genre à ajouter.</param>
+        /// <returns>L'identifiant du genre crée.</returns>
+        public int AddGenre(GenreDto genre)
+        {
+            return new GenreCommand(_context).Add(
+                GenreConverter.ConvertToEntity(genre)
+            );
+        }
+
+        /// <summary>
+        /// Met à jour un genre.
+        /// </summary>
+        /// <param name="genre">Le genre à modifier.</param>
         public void UpdateGenre(GenreDto genre)
         {
-            throw new NotImplementedException();
+            new GenreCommand(_context).Update(
+                GenreConverter.ConvertToEntity(genre)
+            );
         }
 
         /// <summary>
-        /// Permet de surprimer un <see cref="GenreDto"/>
+        /// Supprime un genre par son identifiant.
         /// </summary>
-        public void DeleteGenre(GenreDto genre)
+        /// <param name="id">Identifiant du genre à supprimer.</param>
+        public void DeleteGenre(int id)
         {
-            throw new NotImplementedException();
+            new GenreCommand(_context).Delete(id);
         }
 
         #endregion
@@ -176,35 +269,58 @@ namespace GameDeckBusiness
         #region methods Jeu
 
         /// <summary>
-        /// Obtient la liste des <see cref="JeuDto"/>
+        /// Obtient une liste de <see cref="JeuDto"/>.
         /// </summary>
+        /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
         public List<JeuDto> GetAllJeux()
         {
-            return JeuConverter.ConvertToDto(new JeuQuery(_context).GetAll());
+            return JeuConverter.ConvertToDto(
+                new JeuQuery(_context).GetAll().ToList()
+            );
         }
 
         /// <summary>
-        /// Permet d'ajouter un <see cref="JeuDto"/>
+        /// Obtient un <see cref="JeuDto"/> par son identifiant.
         /// </summary>
-        public JeuDto AddJeu(JeuDto jeu)
+        /// <param name="id">L'identifiant du jeu.</param>
+        /// <returns>Un <see cref="JeuDto"/>.</returns>
+        public JeuDto GetOneJeu(int id)
         {
-            return JeuConverter.ConvertToDto(new JeuQuery(_context).Add(JeuConverter.ConvertToEntity(jeu)));
+            return JeuConverter.ConvertToDto(
+                 new JeuQuery(_context).GetById(id).FirstOrDefault()
+             );
         }
 
         /// <summary>
-        /// Permet de mettre à jour un <see cref="JeuDto"/>
+        /// Ajoute un jeu.
         /// </summary>
+        /// <param name="jeu">Le jeu à ajouter.</param>
+        /// <returns>L'identifiant du jeu crée.</returns>
+        public int AddJeu(JeuDto jeu)
+        {
+            return new JeuCommand(_context).Add(
+                JeuConverter.ConvertToEntity(jeu)
+            );
+        }
+
+        /// <summary>
+        /// Met à jour un jeu.
+        /// </summary>
+        /// <param name="jeu">Le jeu à modifier.</param>
         public void UpdateJeu(JeuDto jeu)
         {
-            throw new NotImplementedException();
+            new JeuCommand(_context).Update(
+                JeuConverter.ConvertToEntity(jeu)
+            );
         }
 
         /// <summary>
-        /// Permet de surprimer un <see cref="JeuDto"/>
+        /// Supprime un jeu par son identifiant.
         /// </summary>
-        public void DeleteJeu(JeuDto jeu)
+        /// <param name="id">Identifiant du jeu à supprimer.</param>
+        public void DeleteJeu(int id)
         {
-            throw new NotImplementedException();
+            new JeuCommand(_context).Delete(id);
         }
 
         #endregion
