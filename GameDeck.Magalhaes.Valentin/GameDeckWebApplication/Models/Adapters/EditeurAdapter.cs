@@ -81,12 +81,12 @@ namespace GameDeckWebApplication.Models.Converters
                 return null;
             }
 
-            List<EditeurVM> entites = new List<EditeurVM>();
+            List<EditeurVM> vms = new List<EditeurVM>();
             foreach (EditeurDto item in dtos)
             {
-                entites.Add(ConvertToVM(item));
+                vms.Add(ConvertToVM(item));
             }
-            return entites;
+            return vms;
         }
 
         #endregion

@@ -93,12 +93,12 @@ namespace GameDeckWebApplication.Models.Converters
                 return null;
             }
 
-            List<JeuVM> entites = new List<JeuVM>();
+            List<JeuVM> vms = new List<JeuVM>();
             foreach (JeuDto item in dtos)
             {
-                entites.Add(ConvertToVM(item));
+                vms.Add(ConvertToVM(item));
             }
-            return entites;
+            return vms;
         }
 
         #endregion

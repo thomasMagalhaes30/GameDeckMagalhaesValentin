@@ -81,12 +81,12 @@ namespace GameDeckWebApplication.Models.Converters
                 return null;
             }
 
-            List<GenreVM> entites = new List<GenreVM>();
+            List<GenreVM> vms = new List<GenreVM>();
             foreach (GenreDto item in dtos)
             {
-                entites.Add(ConvertToVM(item));
+                vms.Add(ConvertToVM(item));
             }
-            return entites;
+            return vms;
         }
 
         #endregion

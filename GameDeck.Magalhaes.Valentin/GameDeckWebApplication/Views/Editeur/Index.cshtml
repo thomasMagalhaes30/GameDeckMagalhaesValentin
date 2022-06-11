@@ -1,5 +1,12 @@
-﻿@{
-    ViewBag.Title = "Les éditeurs";
-}
+﻿@using GameDeckWebApplication.Models
 
-<h1>Les éditeurs</h1>
+
+@model List<EditeurVM>
+
+    @{
+        ViewBag.Title = "Les éditeurs";
+    }
+
+    <h1>Les éditeurs</h1>
+
+    @Html.DisplayForModel(Model)

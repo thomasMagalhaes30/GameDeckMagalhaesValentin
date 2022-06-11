@@ -87,12 +87,12 @@ namespace GameDeckWebApplication.Models.Converters
                 return null;
             }
 
-            List<ExperienceVM> entites = new List<ExperienceVM>();
+            List<ExperienceVM> vms = new List<ExperienceVM>();
             foreach (ExperienceDto item in dtos)
             {
-                entites.Add(ConvertToVM(item));
+                vms.Add(ConvertToVM(item));
             }
-            return entites;
+            return vms;
         }
 
         #endregion

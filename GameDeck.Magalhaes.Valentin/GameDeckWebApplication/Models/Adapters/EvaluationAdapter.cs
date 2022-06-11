@@ -87,12 +87,12 @@ namespace GameDeckWebApplication.Models.Converters
                 return null;
             }
 
-            List<EvaluationVM> entites = new List<EvaluationVM>();
+            List<EvaluationVM> vms = new List<EvaluationVM>();
             foreach (EvaluationDto item in dtos)
             {
-                entites.Add(ConvertToVM(item));
+                vms.Add(ConvertToVM(item));
             }
-            return entites;
+            return vms;
         }
 
         #endregion

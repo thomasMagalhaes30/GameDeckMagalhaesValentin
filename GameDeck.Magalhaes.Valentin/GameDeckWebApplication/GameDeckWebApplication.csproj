@@ -142,6 +142,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Adapters\JeuAdapter.cs" />
+    <Compile Include="Models\Adapters\GenreAdapter.cs" />
+    <Compile Include="Models\Adapters\ExperienceAdapter.cs" />
+    <Compile Include="Models\Adapters\EvaluationAdapter.cs" />
+    <Compile Include="Models\Adapters\EditeurAdapter.cs" />
+    <Compile Include="Models\EditeurVM.cs" />
+    <Compile Include="Models\EvaluationVM.cs" />
+    <Compile Include="Models\ExperienceVM.cs" />
+    <Compile Include="Models\GenreVM.cs" />
+    <Compile Include="Models\JeuVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,10 +192,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Editeur\Index.cshtml" />
     <Content Include="Views\Jeu\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EditeurVM.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EditeurVM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -204,6 +215,10 @@
     <ProjectReference Include="..\GameDeckBusiness\GameDeckBusiness.csproj">
       <Project>{c2391f9b-cc03-4dc9-8b8e-86e235b497f4}</Project>
       <Name>GameDeckBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GameDeckDto\GameDeckDto.csproj">
+      <Project>{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}</Project>
+      <Name>GameDeckDto</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

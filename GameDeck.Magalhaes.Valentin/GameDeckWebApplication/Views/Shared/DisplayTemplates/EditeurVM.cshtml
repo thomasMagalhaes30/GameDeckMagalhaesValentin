@@ -1,0 +1,10 @@
+﻿@model GameDeckWebApplication.Models.EditeurVM
+
+<div>
+    <h3>@Html.DisplayFor(model => model.Nom)</h3>
+    <div class="pull-right">
+        @Html.ActionLink("🖍", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+

@@ -16,6 +16,14 @@ namespace GameDeckConsole
                 Debug.WriteLine("APP CONSOLE");
                 Console.WriteLine($"APP CONSOLE {DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}");
 
+                Console.WriteLine("On vide tout");
+                Manager.GetInstance().GetAllExperiences().ForEach(e => Manager.GetInstance().DeleteExperience(e.Id));
+                Manager.GetInstance().GetAllEvaluations().ForEach(e => Manager.GetInstance().DeleteEvaluation(e.Id));
+                Manager.GetInstance().GetAllJeux().ForEach(j => Manager.GetInstance().DeleteJeu(j.Id));
+                Manager.GetInstance().GetAllGenres().ForEach(g => Manager.GetInstance().DeleteGenre(g.Id));
+                Manager.GetInstance().GetAllEditeurs().ForEach(e => Manager.GetInstance().DeleteEditeur(e.Id));
+
+
                 // GENRE
                 GenreDto g1 = new GenreDto { Nom = "Course" };
                 GenreDto g2 = new GenreDto { Nom = "Aventure" };

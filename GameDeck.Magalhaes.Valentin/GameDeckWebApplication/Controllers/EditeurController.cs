@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GameDeckBusiness;
+using GameDeckDto;
+using GameDeckWebApplication.Models.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +13,8 @@ namespace GameDeckWebApplication.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            List<EditeurDto> dtos = Manager.GetInstance().GetAllEditeurs();
+            return View(EditeurAdapter.ConvertToVM(dtos));
         }
     }
 }
