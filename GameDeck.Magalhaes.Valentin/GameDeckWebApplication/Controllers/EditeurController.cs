@@ -37,6 +37,8 @@ namespace GameDeckWebApplication.Controllers
                 return Json(new { success = false, errors = ModelState.Keys.SelectMany(key => ModelState[key].Errors).Select(msg => msg.ErrorMessage) });
             }
 
+            vm.Id = Manager.GetInstance().AddEditeur(EditeurAdapter.ConvertToDto(vm));
+
             return View(vm);
         }
     }
