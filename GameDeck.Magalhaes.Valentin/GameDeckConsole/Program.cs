@@ -17,8 +17,8 @@ namespace GameDeckConsole
                 Console.WriteLine($"APP CONSOLE {DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss")}");
 
                 // GENRE
-                var g1 = new GenreDto { Nom = "Course" };
-                var g2 = new GenreDto { Nom = "Aventure" };
+                GenreDto g1 = new GenreDto { Nom = "Course" };
+                GenreDto g2 = new GenreDto { Nom = "Aventure" };
                 g1.Id = Manager.GetInstance().AddGenre(g1);
                 g2.Id = Manager.GetInstance().AddGenre(g2);
                 // lecture des genres
@@ -27,8 +27,8 @@ namespace GameDeckConsole
                 Console.WriteLine("...Fin...");
 
                 // EDITEUR
-                var ed1 = new EditeurDto { Nom = "Nintendo" };
-                var ed2 = new EditeurDto { Nom = "Ubisoft" };
+                EditeurDto ed1 = new EditeurDto { Nom = "Nintendo" };
+                EditeurDto ed2 = new EditeurDto { Nom = "Ubisoft" };
                 ed1.Id = Manager.GetInstance().AddEditeur(ed1);
                 ed2.Id = Manager.GetInstance().AddEditeur(ed2);
                 // lecture des editeur
@@ -38,14 +38,14 @@ namespace GameDeckConsole
 
                 // JEUX
                 Console.WriteLine("Ajout des jeux");
-                var j1 = new JeuDto {
+                JeuDto j1 = new JeuDto {
                     Nom = "Tracmania",
                     Description = "Jeu de voiture créer par nadéo",
                     DateSortie = DateTime.Today,
                     GenreId = g1.Id,
                     EditeurId = ed1.Id
                 };
-                var j2 = new JeuDto {
+                JeuDto j2 = new JeuDto {
                     Nom = "kirby",
                     Description = "Jeu d'aventure créer par une personne",
                     DateSortie = new DateTime(2008, 6, 1, 7, 47, 0),
@@ -57,15 +57,15 @@ namespace GameDeckConsole
 
                 // EVALUATION
                 Console.WriteLine("Ajout des évaluations");
-                var eval1 = new EvaluationDto { NomEvaluateur = "Guillaume", Date = new DateTime(2022, 6, 4, 9, 54, 10), Note = 14.7f, JeuId = j1.Id };
-                var eval2 = new EvaluationDto { NomEvaluateur = "Thomas", Date = new DateTime(2022, 6, 4, 9, 55, 30), Note = 18.5f, JeuId = j1.Id };
+                EvaluationDto eval1 = new EvaluationDto { NomEvaluateur = "Guillaume", Date = new DateTime(2022, 6, 4, 9, 54, 10), Note = 14.7f, JeuId = j1.Id };
+                EvaluationDto eval2 = new EvaluationDto { NomEvaluateur = "Thomas", Date = new DateTime(2022, 6, 4, 9, 55, 30), Note = 18.5f, JeuId = j1.Id };
                 eval1.Id = Manager.GetInstance().AddEvaluation(eval1);
                 eval2.Id = Manager.GetInstance().AddEvaluation(eval2);
 
                 // EXPERIENCE
                 Console.WriteLine("Ajout des expériences");
-                var exp1 = new ExperienceDto { Joueur = "Guillaume", TempsJeu = new TimeSpan(5, 6, 13), Pourcentage = 1f, JeuId = j1.Id };
-                var exp2 = new ExperienceDto { Joueur = "Thomas", TempsJeu = new TimeSpan(32, 45, 30), Pourcentage = 2f, JeuId = j1.Id };
+                ExperienceDto exp1 = new ExperienceDto { Joueur = "Guillaume", TempsJeu = new TimeSpan(5, 6, 13), Pourcentage = 1f, JeuId = j1.Id };
+                ExperienceDto exp2 = new ExperienceDto { Joueur = "Thomas", TempsJeu = new TimeSpan(32, 45, 30), Pourcentage = 2f, JeuId = j1.Id };
                 exp1.Id = Manager.GetInstance().AddExperience(exp1);
                 exp2.Id = Manager.GetInstance().AddExperience(exp2);
 
