@@ -3,10 +3,12 @@
 
 @model List<EditeurVM>
 
-    @{
-        ViewBag.Title = "Les éditeurs";
-    }
+@{
+    ViewBag.Title = "Les éditeurs";
+}
 
-    <h1>Les éditeurs</h1>
+<h1>Les éditeurs</h1>
 
-    @Html.DisplayForModel(Model)
+@Html.ActionLink("Ajouter éditeur", "Edit")
+
+@Html.DisplayForModel(Model)
