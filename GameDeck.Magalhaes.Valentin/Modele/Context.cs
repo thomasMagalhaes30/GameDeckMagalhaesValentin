@@ -11,7 +11,8 @@ namespace Modele
         public Context() : base("name=ConnexionString")
         {
             // A remplacer par DropCreateDatabaseIfModelChanges puis par null
-            Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
+            //Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
+            Database.SetInitializer<Context>(new DropCreateDatabaseIfModelChanges<Context>());
         }
 
         public DbSet<Editeur> Editeurs { get; set; }

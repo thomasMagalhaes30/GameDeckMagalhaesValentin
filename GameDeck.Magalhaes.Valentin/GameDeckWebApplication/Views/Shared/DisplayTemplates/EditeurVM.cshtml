@@ -1,0 +1,15 @@
+﻿@model GameDeckWebApplication.Models.EditeurVM
+
+<div class="">
+    @* Le détails *@
+    <div class="">
+        <h3>@Html.DisplayFor(model => model.Nom)</h3>
+    </div>
+
+    @* Les actions *@
+    <div class="">
+        @Html.ActionLink("🖍", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>
+
