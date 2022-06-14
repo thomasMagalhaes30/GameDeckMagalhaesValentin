@@ -1,15 +1,11 @@
 ﻿@model GameDeckWebApplication.Models.EditeurVM
 
-<div class="">
-    @* Le détails *@
-    <div class="">
-        <h3>@Html.DisplayFor(model => model.Nom)</h3>
-    </div>
-
-    @* Les actions *@
-    <div class="">
-        @Html.ActionLink("🖍", "Edit", new { id = Model.Id })
-        @Html.ActionLink("Back to List", "Index")
+<div class="card mb-1" style="width:300px">
+    @*<img class="card-img-top" src="img_avatar1.png" alt="Card image">*@
+    <div class="card-body">
+        <h4 class="card-title text-center">@Html.DisplayFor(model => model.Nom)</h4>
+        @*<p class="card-text">La description.</p>*@
+        @Html.ActionLink("Editer", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary w-100" })
     </div>
 </div>
 

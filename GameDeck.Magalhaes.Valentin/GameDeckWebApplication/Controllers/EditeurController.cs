@@ -26,7 +26,11 @@ namespace GameDeckWebApplication.Controllers
                 dto = Manager.GetInstance().GetOneEditeur(id.Value);
             }
 
-            return View(EditeurAdapter.ConvertToVM(dto));
+            EditeurVM vm = EditeurAdapter.ConvertToVM(dto);
+            // récupérer l'url précédente et la stocker dans le viewmodel
+            vm.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.LocalPath;
+
+            return View(vm);
         }
 
         [HttpPost]
@@ -37,7 +41,17 @@ namespace GameDeckWebApplication.Controllers
                 return Json(new { success = false, errors = ModelState.Keys.SelectMany(key => ModelState[key].Errors).Select(msg => msg.ErrorMessage) });
             }
 
-            return View(vm);
+            if (vm.Id > 0) // modification
+            {
+                Manager.GetInstance().UpdateEditeur(EditeurAdapter.ConvertToDto(vm));
+            }
+            else // création
+            {
+                vm.Id = Manager.GetInstance().AddEditeur(EditeurAdapter.ConvertToDto(vm));
+            }
+           
+
+            return Redirect(vm.PreviousUrl);
         }
     }
 }

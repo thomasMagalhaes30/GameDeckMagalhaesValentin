@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using GameDeckWebApplication.Models.Extentions;
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -8,30 +10,31 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-
+<body class="min-vh-100 d-flex flex-column">
     <nav class="navbar navbar-expand-lg bg-dark fixed-top navbar-dark">
         <div class="container-fluid">
-            @Html.ActionLink("GameDeck", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("🎮 GameDeck", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link @Html.IsActive("Index", "Editeur")" href="@Url.Action("Index", "Editeur")">Éditeurs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link @Html.IsActive("Index", "Jeu")" href="@Url.Action("Index", "Jeu")">Jeux</a>
                     </li>
-                    <li class="nav-item">@Html.ActionLink("Éditeurs", "Index", "Editeur", null,  new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Jeux", "Index", "Jeu", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("À propos de", "About", "Home", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">
+                        <a class="nav-link @Html.IsActive("About", "Home")" href="@Url.Action("About", "Home")">À propos de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @Html.IsActive("Contact", "Home")" href="@Url.Action("Contact", "Home")">Contact</a>
+                    </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
                 </form>
             </div>
         </div>
@@ -41,8 +44,8 @@
         @RenderBody()
     </div>
 
-    <footer>
-        <hr />
+    <footer class="mt-auto">
+        <hr/>
         <p class="text-center">&copy; @DateTime.Now.Year - Mon application ASP.NET fait avec 💙 par Guillaume & Thomas</p>
     </footer>
 
