@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace GameDeckWebApplication.Models
@@ -23,5 +24,10 @@ namespace GameDeckWebApplication.Models
         /// Obtient ou definit la liste de <see cref="JeuVM"/> de l'<see cref="EditeurVM"/>.
         /// </summary>
         public ICollection<JeuVM> Jeux { get; set; } = new List<JeuVM>();
+
+        /// <summary>
+        /// Obtient ou definit l'url precedent.
+        /// </summary>
+        public String PreviousUrl { get; set; }
     }
 }
