@@ -4,12 +4,77 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:local="clr-namespace:GameDeckWpf.View"
+             xmlns:local="clr-namespace:GameDeckWpf.View" 
+             xmlns:converter="clr-namespace:GameDeckWpf.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
+    <UserControl.Resources>
+        <converter:BoolToVisibilityConverter x:Key="boolToVisibility"/>
+        <converter:BoolToVisibilityRevertConverter x:Key="boolToVisibilityRevert"/>
+    </UserControl.Resources>
     <DockPanel>
-        <local:GameDeckMaster DockPanel.Dock="Left" MinWidth="100"/>
-        <local:GameDeckDetail DockPanel.Dock="Right"/>
+        <!--<local:GameDeckMaster DockPanel.Dock="Left" MinWidth="100"/>-->
+
+        <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
+            <Label HorizontalAlignment="Left" Content="Cathégorie"/>
+            <ComboBox StaysOpenOnEdit="True" IsEditable="True" ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <ListView ItemsSource="{Binding GamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        
+        <ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto">
+
+            <UniformGrid Columns="2" Margin="15,5"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left">
+                <UniformGrid.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Style.Triggers>
+                            <!--<DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=IsReadOnly}" Value="true">-->
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsReadOnly}" Value="true">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Background" Value="{x:Null}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                </UniformGrid.Resources>
+
+                <!--<Label FontSize="25" Margin="15" Content="oui"/>-->
+                <Label Grid.Column="0"
+                       Content="Nom"/>
+                <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Label Grid.Column="0"
+                       Content="Editeur"/>
+                <StackPanel VerticalAlignment="Center">
+                    <ComboBox Grid.Column="1" Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Grid.Column="1" Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                </StackPanel>
+
+                <Label Grid.Column="0"
+                       Content="Genre"/>
+                <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Label Grid.Column="0"
+                       Content="Date de sortie"/>
+                <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Label Grid.Row="0"
+                       Content="Description"/>
+                <TextBox Grid.Row="1" IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            </UniformGrid>
+
+        </ScrollViewer>
     </DockPanel>
 </UserControl>

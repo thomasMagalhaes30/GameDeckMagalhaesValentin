@@ -51,11 +51,11 @@ namespace GameDeckDto
         /// <summary>
         /// Obtient ou definit la liste de <see cref="EvaluationDto"/> du <see cref="JeuDto"/>.
         /// </summary>
-        public ICollection<EvaluationDto> Evaluations { get; set; } = new List<EvaluationDto>();
+        public ICollection<EvaluationDto> Evaluations { get; set; }
 
         /// <summary>
         /// Obtient ou definit la liste de <see cref="ExperienceDto"/> du <see cref="JeuDto"/>.
         /// </summary>
-        public ICollection<ExperienceDto> Experiences { get; set; } = new List<ExperienceDto>();
+        public ICollection<ExperienceDto> Experiences { get; set; }
     }
 }

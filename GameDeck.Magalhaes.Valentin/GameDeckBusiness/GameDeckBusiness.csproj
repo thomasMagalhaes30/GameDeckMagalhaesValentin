@@ -71,6 +71,7 @@
     <Compile Include="Queries\ExperienceQuery.cs" />
     <Compile Include="Queries\GenreQuery.cs" />
     <Compile Include="Queries\JeuQuery.cs" />
+    <Compile Include="Util\ManagerUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameDeckDto\GameDeckDto.csproj">
@@ -86,7 +87,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

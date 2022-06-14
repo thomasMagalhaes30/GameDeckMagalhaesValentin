@@ -20,6 +20,6 @@ namespace GameDeckDto
         /// <summary>
         /// Obtient ou definit la liste de <see cref="JeuDto"/> du <see cref="GenreDto"/>.
         /// </summary>
-        public ICollection<JeuDto> Jeux { get; set; } = new List<JeuDto>();
+        public ICollection<JeuDto> Jeux { get; set; }
     }
 }
