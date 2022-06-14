@@ -55,7 +55,7 @@ namespace GameDeckConsole
                 };
                 JeuDto j2 = new JeuDto {
                     Nom = "kirby",
-                    Description = "Jeu d'aventure créer par une personne",
+                    Description = "Jeu d'aventure créer par une personne chinoise du japon",
                     DateSortie = new DateTime(2008, 6, 1, 7, 47, 0),
                     GenreId = g2.Id,
                     EditeurId = ed2.Id
