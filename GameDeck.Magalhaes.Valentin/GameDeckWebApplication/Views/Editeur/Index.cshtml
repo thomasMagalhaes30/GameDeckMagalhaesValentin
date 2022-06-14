@@ -9,6 +9,10 @@
 
 <h1>Les éditeurs</h1>
 
-@Html.ActionLink("Ajouter éditeur", "Edit")
+@Html.ActionLink("Ajouter un éditeur", "Edit", null, new { @class = "btn btn-primary w-100" })
 
-@Html.DisplayForModel(Model)
+<div class="d-flex flex-wrap justify-content-evenly mt-2">
+    @Html.DisplayForModel(Model)
+</div>
+
+

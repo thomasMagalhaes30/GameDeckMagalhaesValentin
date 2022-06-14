@@ -151,6 +151,7 @@
     <Compile Include="Models\EvaluationVM.cs" />
     <Compile Include="Models\ExperienceVM.cs" />
     <Compile Include="Models\GenreVM.cs" />
+    <Compile Include="Models\Extentions\HtmlUtils.cs" />
     <Compile Include="Models\JeuVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
