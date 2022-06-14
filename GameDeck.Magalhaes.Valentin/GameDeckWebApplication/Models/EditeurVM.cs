@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 namespace GameDeckWebApplication.Models
 {
     /// <summary>
-    /// Represente le viewmodel d'un edituer.
+    /// Represente le viewmodel d'un editeur.
     /// </summary>
-    public class EditeurVM
+    public class EditeurVM : BaseVM
     {
         /// <summary>
         /// Obtient ou definit l'identifiant de l'<see cref="EditeurVM"/>.
@@ -25,9 +25,5 @@ namespace GameDeckWebApplication.Models
         /// </summary>
         public ICollection<JeuVM> Jeux { get; set; } = new List<JeuVM>();
 
-        /// <summary>
-        /// Obtient ou definit l'url precedent.
-        /// </summary>
-        public String PreviousUrl { get; set; }
     }
 }

@@ -30,5 +30,31 @@ namespace GameDeckWebApplication.Models.Extentions
 
             return returnActive ? "active" : "";
         }
+
+        public static HtmlString CustomDropDownList(this HtmlHelper htmlHelper, string propertyName, string url, string data)
+        {
+            string htmlString = $"<select class='form-control' id='{propertyName}' name='{propertyName}'></select>";
+
+            htmlString += "" +
+                "<script>" +
+                    "$(document).ready(function() {" +
+                        " $.ajax({" +
+                            "type: \"GET\"," +
+                            "url: \"" + url + "\"," +
+                            "data: \"{" + data + "}\"," +
+                            "success: function(data) {" +
+                                "var content = '<option value=\"-1\">Aucune selection</option>';" +
+                                "for (var i = 0; i < data.length; i++){" +
+                                    " content += `<option value = \"${data[i].Value}\">${ data[i].Name}</option>`;" +
+                                "}" +
+                                "$(\"#"+ propertyName +"\").html(content);" + 
+                            "}" +
+                        "});" +
+                    " });" + 
+                "</script>";
+
+            return new HtmlString(htmlString);
+        }
+            
     }
 }

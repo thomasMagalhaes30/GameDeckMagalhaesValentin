@@ -136,6 +136,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\EditeurController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JeuController.cs" />
@@ -147,12 +148,14 @@
     <Compile Include="Models\Adapters\ExperienceAdapter.cs" />
     <Compile Include="Models\Adapters\EvaluationAdapter.cs" />
     <Compile Include="Models\Adapters\EditeurAdapter.cs" />
+    <Compile Include="Models\BaseVM.cs" />
     <Compile Include="Models\EditeurVM.cs" />
     <Compile Include="Models\EvaluationVM.cs" />
     <Compile Include="Models\ExperienceVM.cs" />
     <Compile Include="Models\GenreVM.cs" />
     <Compile Include="Models\Extentions\HtmlUtils.cs" />
     <Compile Include="Models\JeuVM.cs" />
+    <Compile Include="Models\Utils\DropDownItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -233,6 +236,9 @@
     <Content Include="Views\Shared\DisplayTemplates\EditeurVM.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\EditeurVM.cshtml" />
     <Content Include="Views\Editeur\Edit.cshtml" />
+    <Content Include="Views\Jeu\Edit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\JeuVM.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\JeuVM.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

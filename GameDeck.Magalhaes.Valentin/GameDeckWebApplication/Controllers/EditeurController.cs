@@ -2,6 +2,7 @@
 using GameDeckDto;
 using GameDeckWebApplication.Models;
 using GameDeckWebApplication.Models.Converters;
+using GameDeckWebApplication.Models.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace GameDeckWebApplication.Controllers
 
             EditeurVM vm = EditeurAdapter.ConvertToVM(dto);
             // récupérer l'url précédente et la stocker dans le viewmodel
-            vm.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer.LocalPath;
+            vm.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer?.LocalPath;
 
             return View(vm);
         }
@@ -52,6 +53,22 @@ namespace GameDeckWebApplication.Controllers
            
 
             return Redirect(vm.PreviousUrl);
+        }
+
+        /// <summary>
+        /// Obtient tous les editeurs au format json.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetJsonEditeurs()
+        {
+            List<EditeurDto> dtos = Manager.GetInstance().GetAllEditeurs();
+
+            return Json(EditeurAdapter.ConvertToVM(dtos).Select(vm => new DropDownItem
+            {
+                Value = vm.Id,
+                Name = vm.Nom,
+            }).ToList(), JsonRequestBehavior.AllowGet);
+
         }
     }
 }

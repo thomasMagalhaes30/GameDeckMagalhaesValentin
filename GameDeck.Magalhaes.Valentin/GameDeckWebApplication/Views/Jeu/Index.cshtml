@@ -1,5 +1,15 @@
-﻿@{
+﻿@using GameDeckWebApplication.Models
+
+@model List<JeuVM>
+
+@{
     ViewBag.Title = "Les jeux";
 }
 
 <h1>Les jeux</h1>
+
+@Html.ActionLink("Ajouter un jeu", "Edit", null, new { @class = "btn btn-primary w-100" })
+
+<div class="d-flex flex-wrap justify-content-evenly mt-2">
+    @Html.DisplayForModel(Model)
+</div>
