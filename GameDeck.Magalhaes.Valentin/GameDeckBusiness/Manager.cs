@@ -17,7 +17,7 @@ namespace GameDeckBusiness
     public class Manager : IManager
     {
         private static Manager _instance = null;
-        private Context _context;
+        private readonly Context _context;
 
         private Manager()
         {
