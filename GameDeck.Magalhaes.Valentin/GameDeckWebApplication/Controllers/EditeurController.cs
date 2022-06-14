@@ -58,7 +58,6 @@ namespace GameDeckWebApplication.Controllers
         /// <summary>
         /// Obtient tous les editeurs au format json.
         /// </summary>
-        /// <returns></returns>
         public ActionResult GetJsonEditeurs()
         {
             List<EditeurDto> dtos = Manager.GetInstance().GetAllEditeurs();

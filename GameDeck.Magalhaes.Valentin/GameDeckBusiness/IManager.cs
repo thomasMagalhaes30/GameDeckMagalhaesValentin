@@ -189,6 +189,20 @@ namespace GameDeckBusiness
         /// <param name="id">Identifiant du jeu à supprimer.</param>
         void DeleteJeu(int id);
 
+        /// <summary>
+        /// Obtient une liste de <see cref="JeuDto"/> correspondant à la recherche.
+        /// </summary>
+        /// <param name="searchText">la recherche.</param>
+        /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
+        List<JeuDto> FindJeuxByName(string searchText);
+
+        /// <summary>
+        /// Obtient une liste de <see cref="JeuDto"/> ayant les meilleurs notes.
+        /// </summary>
+        /// <param name="nbItem">nombre d'item a recupérer.</param>
+        /// <returns>Une liste de <see cref="JeuDto"/> ayant les meilleurs notes.</returns>
+        List<JeuDto> TopJeuxByMark(int nbItem);
+
         #endregion
     }
 }

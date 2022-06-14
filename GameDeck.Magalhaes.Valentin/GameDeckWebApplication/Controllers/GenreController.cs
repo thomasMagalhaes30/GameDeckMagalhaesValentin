@@ -22,7 +22,6 @@ namespace GameDeckWebApplication.Controllers
         /// <summary>
         /// Obtient tous les editeurs au format json.
         /// </summary>
-        /// <returns></returns>
         public ActionResult GetJsonGenres()
         {
             List<GenreDto> dtos = Manager.GetInstance().GetAllGenres();

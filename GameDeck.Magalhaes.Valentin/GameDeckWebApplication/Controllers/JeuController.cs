@@ -51,5 +51,15 @@ namespace GameDeckWebApplication.Controllers
 
             return Redirect(vm.PreviousUrl);
         }
+
+        public ActionResult Search(string searchText)
+        {
+            if (searchText == null)
+            {
+                searchText = Request.QueryString["search"];
+            }
+            List<JeuDto> dtos = Manager.GetInstance().FindJeuxByName(searchText);
+            return View(JeuAdapter.ConvertToVM(dtos));
+        }
     }
 }

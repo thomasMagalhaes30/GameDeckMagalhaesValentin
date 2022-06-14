@@ -33,8 +33,8 @@
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" id="search">
+                    <button class="btn btn-outline-success" type="button" onclick="SearchJeu()">Rechercher</button>
                 </form>
             </div>
         </div>
@@ -52,5 +52,15 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+    @* TODO a sortir d'ici *@
+    <script>
+        function SearchJeu()
+        {
+            $(location).attr('href', `@Url.Action("Search", "Jeu")?search=${$('#search').val()}`);
+        }
+    </script>
+
 </body>
 </html>

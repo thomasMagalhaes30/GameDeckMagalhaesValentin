@@ -26,7 +26,7 @@ namespace GameDeckBusiness.Commands
         /// </summary>
         /// <param name="id">Identifiant de l'entite</param>
         /// <returns>L'entite avec l'identifiant passé en paramètre</returns>
-        public T GetEntityById(int id)
+        protected T GetEntityById(int id)
         {
             return GetDbSet().Where(entite => entite.Id == id).FirstOrDefault();
         }

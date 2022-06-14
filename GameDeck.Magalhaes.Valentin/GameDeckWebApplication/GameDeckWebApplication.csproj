@@ -239,6 +239,7 @@
     <Content Include="Views\Jeu\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\JeuVM.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\JeuVM.cshtml" />
+    <Content Include="Views\Jeu\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

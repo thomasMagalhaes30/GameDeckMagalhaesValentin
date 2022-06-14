@@ -3,9 +3,9 @@ using GameDeckBusiness.Converters;
 using GameDeckBusiness.Queries;
 using GameDeckDto;
 using Modele;
-using Modele.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace GameDeckBusiness
@@ -321,6 +321,30 @@ namespace GameDeckBusiness
         public void DeleteJeu(int id)
         {
             new JeuCommand(_context).Delete(id);
+        }
+
+        /// <summary>
+        /// Obtient une liste de <see cref="JeuDto"/> correspondant à la recherche.
+        /// </summary>
+        /// <param name="searchText">la recherche.</param>
+        /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
+        public List<JeuDto> FindJeuxByName(string searchText)
+        {
+            return JeuConverter.ConvertToDto(
+                new JeuQuery(_context).GetAll().Where(jeu => jeu.Nom.Contains(searchText)).ToList()
+            );
+        }
+
+        /// <summary>
+        /// Obtient une liste de <see cref="JeuDto"/> ayant les meilleurs notes.
+        /// </summary>
+        /// <param name="nbItem">nombre d'item a recupérer.</param>
+        /// <returns>Une liste de <see cref="JeuDto"/> ayant les meilleurs notes.</returns>
+        public List<JeuDto> TopJeuxByMark(int nbItem)
+        {
+            return JeuConverter.ConvertToDto(
+                new JeuQuery(_context).GetAll().Include(j => j.Evaluations).OrderByDescending(jeu => jeu.Evaluations.Average(e => e.Note)).Take(nbItem).ToList()
+            );
         }
 
         #endregion
