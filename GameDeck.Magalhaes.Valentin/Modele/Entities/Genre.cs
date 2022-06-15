@@ -15,6 +15,6 @@ namespace Modele.Entities
         /// <summary>
         /// Obtient ou definit la liste de <see cref="Jeu"/> du <see cref="Genre"/>.
         /// </summary>
-        public ICollection<Jeu> Jeux { get; set; } = new List<Jeu>();
+        public virtual ICollection<Jeu> Jeux { get; set; } = new List<Jeu>();
     }
 }

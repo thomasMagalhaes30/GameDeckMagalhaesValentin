@@ -23,7 +23,7 @@ namespace GameDeckWebApplication.Controllers
             {
                 dto = Manager.GetInstance().GetOneJeu(id.Value);
             }
-            
+           
             // on remplit les view bag qui seront utilisés dans les dropdown
             ViewBag.Editeurs = Manager.GetInstance().GetAllEditeurs().Select(edi => new SelectListItem {
                 Value = edi.Id.ToString(),
