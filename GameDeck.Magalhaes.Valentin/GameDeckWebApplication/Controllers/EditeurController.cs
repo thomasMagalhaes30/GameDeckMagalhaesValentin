@@ -52,7 +52,7 @@ namespace GameDeckWebApplication.Controllers
             }
            
 
-            return Redirect(vm.PreviousUrl);
+            return Redirect(vm.PreviousUrl ?? "/");
         }
 
         /// <summary>
