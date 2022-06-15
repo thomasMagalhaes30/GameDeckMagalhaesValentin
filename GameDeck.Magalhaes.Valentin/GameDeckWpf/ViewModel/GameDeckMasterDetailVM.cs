@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using static GameDeckBusiness.Util.ManagerUtil;
 
@@ -87,6 +88,13 @@ namespace GameDeckWpf.ViewModel
         {
             get => _btnModifier_CMD ?? (_btnModifier_CMD = new RelayCommand(c => BtnModifier()));
         }
+
+        private RelayCommand _testCommand;
+        public RelayCommand TestCommand
+        {
+            get => _testCommand ?? (_testCommand = new RelayCommand(c => testCMD()));
+        }
+        private void testCMD() => MessageBox.Show("ça marche !");
 
         //public ICommand BtnModifier_CMD { get;  }
         private void BtnModifier()

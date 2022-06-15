@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:GameDeckWpf.View" 
              xmlns:viewmodel="clr-namespace:GameDeckWpf.ViewModel" 
@@ -11,34 +12,73 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <DockPanel>
-        <!--<local:GameDeckMaster DockPanel.Dock="Left" MinWidth="100"/>-->
+        <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="DimGray">
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Right">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Margin" Value="2"/>
+                        <Setter Property="CornerRadius" Value="2"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                        <Setter Property="Background" Value="LightGray"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Border Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}">
+                    <Button Command="{Binding BtnModifier_CMD}">
+                        Modifier
+                    </Button>
+                </Border>
+                <Border Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">
+                    <Button Command="{Binding BtnModifier_CMD}">
+                        Enregistrer
+                    </Button>
+                </Border>
+                <Border Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">
+                    <Button Command="{Binding BtnModifier_CMD}">
+                        Annuler
+                    </Button>
+                </Border>
+            </StackPanel>
+        </Border>
 
-        <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
-            <Label HorizontalAlignment="Left" Content="Cathégorie"/>
-            <ComboBox DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True" 
-                      ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <ListView VerticalAlignment="Stretch"
+        <Border DockPanel.Dock="Left" BorderThickness="0,0,1,0" BorderBrush="DimGray">
+            <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
+                <Label HorizontalAlignment="Left" Content="Cathégorie"/>
+                <ComboBox DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True" 
+                          ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding TestCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+                <ListView VerticalAlignment="Stretch"
                       SelectedItem="{Binding CurrentGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                       SelectedValue="{Binding CurrentGame.Id, UpdateSourceTrigger=PropertyChanged}"
                       SelectedValuePath="Id"
                       ItemsSource="{Binding GamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        <Setter Property="BorderThickness" Value="1"/>
-                        <Setter Property="BorderBrush" Value="DodgerBlue"/>
-                        <Setter Property="Margin" Value="0,0,0,1"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border CornerRadius="2">
-                            <TextBlock FontWeight="Bold" TextAlignment="Center" Text="{Binding Nom}"/>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="BorderBrush" Value="DodgerBlue"/>
+                            <Setter Property="Margin" Value="0,0,0,1"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="2">
+                                <TextBlock FontWeight="Bold" TextAlignment="Center" Text="{Binding Nom}"/>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Border>
 
         <ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto">
             <ScrollViewer.Resources>
@@ -132,10 +172,6 @@
                          VerticalContentAlignment="Top"
                          Text="{Binding CurrentGame.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                          IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-
-                <Button HorizontalAlignment="Right" Margin="0,10" Command="{Binding BtnModifier_CMD}">
-                    Modifier
-                </Button>
             </StackPanel>
 
         </ScrollViewer>
