@@ -283,11 +283,22 @@ namespace GameDeckBusiness
         /// Obtient un <see cref="JeuDto"/> par son identifiant.
         /// </summary>
         /// <param name="id">L'identifiant du jeu.</param>
+        /// <param name="includeAll">Indique si on veut inclure toutes propriétés du jeu (faux par défaut).</param>
         /// <returns>Un <see cref="JeuDto"/>.</returns>
-        public JeuDto GetOneJeu(int id)
+        public JeuDto GetOneJeu(int id, bool? includeAll = false)
         {
+            IQueryable<Modele.Entities.Jeu> query = new JeuQuery(_context).GetById(id);
+
+            if (includeAll.HasValue && includeAll.Value)
+            {
+                query.Include(jeu => jeu.GenreObj);
+                query.Include(jeu => jeu.EditeurObj);
+                query.Include(jeu => jeu.Evaluations);
+                query.Include(jeu => jeu.Experiences);
+            }
+
             return JeuConverter.ConvertToDto(
-                 new JeuQuery(_context).GetById(id).FirstOrDefault()
+                 query.FirstOrDefault()
              );
         }
 

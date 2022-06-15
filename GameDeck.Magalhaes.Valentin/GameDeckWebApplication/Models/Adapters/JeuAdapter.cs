@@ -54,6 +54,10 @@ namespace GameDeckWebApplication.Models.Converters
                 DateSortie = dto.DateSortie,
                 GenreId = dto.GenreId,
                 EditeurId = dto.EditeurId,
+                EditeurObj = EditeurAdapter.ConvertToVM(dto.EditeurObj),
+                GenreObj = GenreAdapter.ConvertToVM(dto.GenreObj),
+                Evaluations = EvaluationAdapter.ConvertToVM(dto.Evaluations?.ToList()),
+                Experiences = ExperienceAdapter.ConvertToVM(dto.Experiences?.ToList()),
             };
         }
 
