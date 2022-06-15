@@ -32,13 +32,18 @@
                         Modifier
                     </Button>
                 </Border>
+                <Border Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}">
+                    <Button Command="{Binding BtnAjouter_CMD}">
+                        Ajouter
+                    </Button>
+                </Border>
                 <Border Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">
-                    <Button Command="{Binding BtnModifier_CMD}">
+                    <Button Command="{Binding BtnEnregistrer_CMD}">
                         Enregistrer
                     </Button>
                 </Border>
                 <Border Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">
-                    <Button Command="{Binding BtnModifier_CMD}">
+                    <Button Command="{Binding BtnAnnuler_CMD}">
                         Annuler
                     </Button>
                 </Border>
@@ -48,18 +53,17 @@
         <Border DockPanel.Dock="Left" BorderThickness="0,0,1,0" BorderBrush="DimGray">
             <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
                 <Label HorizontalAlignment="Left" Content="Cathégorie"/>
-                <ComboBox DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True" 
+                <ComboBox DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
+                          IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
                           ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding TestCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding Cmb_CathegorieItemChangedCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}, Path=SelectedItem}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </ComboBox>
-                <ListView VerticalAlignment="Stretch"
+                <ListView VerticalAlignment="Stretch" IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding CurrentGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                      SelectedValue="{Binding CurrentGame.Id, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedValuePath="Id"
                       ItemsSource="{Binding GamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">

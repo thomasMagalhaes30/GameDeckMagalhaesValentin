@@ -72,10 +72,15 @@
     <Compile Include="Converter\BoolToVisibilityRevertConverter.cs" />
     <Compile Include="Enum\ActionEnum.cs" />
     <Compile Include="Extensions\EditeurDtoExtension.cs" />
+    <Compile Include="Extensions\EditeurVMExtension.cs" />
     <Compile Include="Extensions\EvaluationDtoExtension.cs" />
+    <Compile Include="Extensions\EvaluationVMExtension.cs" />
     <Compile Include="Extensions\ExperienceDtoExtension.cs" />
+    <Compile Include="Extensions\ExperienceVMExtension.cs" />
     <Compile Include="Extensions\GenreDtoExtension.cs" />
+    <Compile Include="Extensions\GenreVMExtension.cs" />
     <Compile Include="Extensions\JeuDtoExtension.cs" />
+    <Compile Include="Extensions\JeuVMExtension.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel\BaseVM.cs" />
     <Compile Include="ViewModel\EditeurVM.cs" />

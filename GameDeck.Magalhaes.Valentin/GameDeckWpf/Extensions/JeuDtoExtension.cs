@@ -7,6 +7,9 @@ namespace GameDeckWpf.Extensions
 {
     public static class JeuDtoExtension
     {
+        /// <summary>
+        /// Convertie <see cref="JeuDto"/> en <see cref="JeuVM"/>.
+        /// </summary>
         public static JeuVM ToViewModel(this JeuDto dto) =>
             new JeuVM()
             {
