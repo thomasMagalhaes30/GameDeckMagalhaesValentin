@@ -129,16 +129,15 @@ namespace GameDeckWpf.ViewModel
         private RelayCommand _btnAnnuler_CMD;
         public RelayCommand BtnAnnuler_CMD => _btnAnnuler_CMD ?? (_btnAnnuler_CMD = new RelayCommand(c => BtnAnnuler()));
 
+        private RelayCommand _BtnSupprimer_CMD;
+        public RelayCommand BtnSupprimer_CMD => _BtnSupprimer_CMD ?? (_BtnSupprimer_CMD = new RelayCommand(c => BtnSupprimer()));
+
         private RelayCommand _cmb_CathegorieItemChangedCMD;
         public RelayCommand Cmb_CathegorieItemChangedCMD => _cmb_CathegorieItemChangedCMD ?? (_cmb_CathegorieItemChangedCMD = new RelayCommand(c => CmbCathegorieItemChanged(c)));
-        #endregion
 
-        private RelayCommand _testCommand;
-        public RelayCommand TestCommand
-        {
-            get => _testCommand ?? (_testCommand = new RelayCommand(c => testCMD()));
-        }
-        private void testCMD() => MessageBox.Show("ça marche !");
+        private RelayCommand _dp_DateSortieLostFocusCMD;
+        public RelayCommand Dp_DateSortieLostFocusCMD => _dp_DateSortieLostFocusCMD ?? (_dp_DateSortieLostFocusCMD = new RelayCommand(c => DpDateSortieLostFocus(c)));
+        #endregion
 
         #region [ Construct ]
 
@@ -172,15 +171,15 @@ namespace GameDeckWpf.ViewModel
 
         private void BtnEnregistrer()
         {
-            int Id = CurrentGame?.Id ?? 0;
-
             if (CurrentAction == ActionEnum.MODIFIER)
                 GetManager().UpdateJeu(CurrentGame?.ToDto());
             if (CurrentAction == ActionEnum.AJOUTER)
                 CurrentGame.Id = GetManager().AddJeu(CurrentGame?.ToDto());
 
-            CurrentAction = ActionEnum.CONSULTER;
+            int Id = CurrentGame?.Id ?? 0;
+
             LoadGamesList();
+            CurrentAction = ActionEnum.CONSULTER;
             CurrentGame = GamesList.SingleOrDefault(g => g.Id == Id);
         }
 
@@ -193,17 +192,44 @@ namespace GameDeckWpf.ViewModel
 
             CurrentAction = ActionEnum.CONSULTER;
         }
+        private void BtnSupprimer()
+        {
+            GetManager().DeleteJeu(CurrentGame.Id);
+            LoadGamesList();
+        }
 
         private void CmbCathegorieItemChanged(object selectedCategorie)
         {
-            GenreVM genre = selectedCategorie as GenreVM;
-            if (genre == null)
+            if (!(selectedCategorie is GenreVM genre))
             {
                 LoadGamesList();
                 return;
             }
 
             GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux().Where(g => g.GenreId == genre?.Id).Select(j => j?.ToViewModel()));
+
+            CurrentGame = GamesList.FirstOrDefault();
+        }
+
+        private void DpDateSortieLostFocus(object stringDate)
+        {
+            DateTime minDate = new DateTime(1970, 1, 1);
+            DateTime maxDate = new DateTime(2999, 12, 30);
+
+            if (!(stringDate is string sdate))
+            {
+                LoadGamesList();
+                return;
+            }
+
+            List<int> d = sdate.Split('/').Select(v => int.Parse(v)).ToList();
+            DateTime date = new DateTime(d[2], d[1], d[0]);
+
+            if (date < minDate)
+                CurrentGame.DateSortie = minDate;
+            
+            if (date > maxDate)
+                CurrentGame.DateSortie = maxDate;
         }
         #endregion
 

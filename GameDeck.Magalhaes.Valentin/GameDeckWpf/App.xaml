@@ -7,6 +7,7 @@
     <Application.Resources>
         <converter:BoolToVisibilityConverter x:Key="boolToVisibility"/>
         <converter:BoolToVisibilityRevertConverter x:Key="boolToVisibilityRevert"/>
-         
+        <converter:BoolToReverteBoolConverter x:Key="RevertBool"/>
+
     </Application.Resources>
 </Application>

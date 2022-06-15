@@ -47,10 +47,15 @@
                         Annuler
                     </Button>
                 </Border>
+                <Border Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}">
+                    <Button Command="{Binding BtnSupprimer_CMD}">
+                        Supprimer
+                    </Button>
+                </Border>
             </StackPanel>
         </Border>
 
-        <Border DockPanel.Dock="Left" BorderThickness="0,0,1,0" BorderBrush="DimGray">
+        <Border DockPanel.Dock="Left" BorderThickness="0,1,1,0" BorderBrush="DimGray">
             <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
                 <Label HorizontalAlignment="Left" Content="Cathégorie"/>
                 <ComboBox DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
@@ -114,6 +119,11 @@
                     <Setter Property="Height" Value="25"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
                 </Style>
+                <Style TargetType="DatePicker">
+                    <Setter Property="Width" Value="125"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
             </ScrollViewer.Resources>
 
             <StackPanel Margin="15,5">
@@ -139,6 +149,8 @@
                         <StackPanel VerticalAlignment="Center">
                             <ComboBox DisplayMemberPath="Nom" Grid.Column="1" StaysOpenOnEdit="True" IsEditable="True" 
                                       Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedValue="{Binding Path=CurrentGame.EditeurId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedValuePath="Id"
+                                      SelectedItem="{Binding Path=CurrentGame.Editeur.Nom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       ItemsSource="{Binding EditeursList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Column="1" 
                                      Text="{Binding CurrentGame.Editeur, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -152,9 +164,11 @@
                         <StackPanel VerticalAlignment="Center">
                             <ComboBox DisplayMemberPath="Nom" Grid.Column="1" StaysOpenOnEdit="True" IsEditable="True" 
                                       Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedValue="{Binding Path=CurrentGame.GenreId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedValuePath="Id"
+                                      SelectedItem="{Binding Path=CurrentGame.Genre, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Column="1" 
-                                     Text="{Binding CurrentGame.Editeur, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                     Text="{Binding CurrentGame.Editeur.Nom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                         </StackPanel>
                     </WrapPanel>
@@ -162,9 +176,21 @@
                     <WrapPanel>
                         <Label Grid.Column="0"
                            Content="Date de sortie"/>
-                        <TextBox Grid.Column="1" 
-                                 Text="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ConverterCulture=fr-FR, StringFormat=d}"
-                                 IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <StackPanel>
+                            <DatePicker Grid.Column="1"
+                                    Text="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ConverterCulture=fr-FR, StringFormat=d}"
+                                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource RevertBool}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="LostFocus">
+                                        <i:InvokeCommandAction Command="{Binding Dp_DateSortieLostFocusCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DatePicker}, Path=Text}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </DatePicker>
+                            <TextBox Grid.Column="1"  IsReadOnly="True"
+                                     Text="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ConverterCulture=fr-FR, StringFormat=d}"
+                                     Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
 
                     </WrapPanel>
 
