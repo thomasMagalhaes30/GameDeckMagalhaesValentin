@@ -167,8 +167,9 @@ namespace GameDeckBusiness
         /// Obtient un <see cref="JeuDto"/> par son identifiant.
         /// </summary>
         /// <param name="id">L'identifiant du jeu.</param>
+        /// <param name="includeAll">Indique si on veut inclure toutes propriétés du jeu (faux par défaut).</param>
         /// <returns>Un <see cref="JeuDto"/>.</returns>
-        JeuDto GetOneJeu(int id);
+        JeuDto GetOneJeu(int id, bool? includeAll = false);
 
         /// <summary>
         /// Ajoute un jeu.

@@ -50,7 +50,7 @@
                 @Html.LabelFor(model => model.GenreId, new { @class = "form-label" })
             </div>
             <div class="col-md-8">
-                @Html.CustomDropDownList(nameof(Model.GenreId), @Url.Action("GetJsonGenres", "Genre"), "")
+                @Html.DropDownList(nameof(Model.GenreId), new SelectList(ViewBag.Genres, "Value", "Text"), new { @class = "form-select" })
                 @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +60,7 @@
                 @Html.LabelFor(model => model.EditeurId, new { @class = "form-label" })
             </div>
             <div class="col-md-8">
-                @Html.CustomDropDownList(nameof(Model.EditeurId), @Url.Action("GetJsonEditeurs", "Editeur"), "")
+                @Html.DropDownList(nameof(Model.EditeurId), new SelectList(ViewBag.Editeurs, "Value", "Text"), new { @class = "form-select" })
                 @Html.ValidationMessageFor(model => model.EditeurId, "", new { @class = "text-danger" })
             </div>
         </div>

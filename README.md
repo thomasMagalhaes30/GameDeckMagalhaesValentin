@@ -6,6 +6,22 @@ GameDeck est un projet de Licence Pro de l'IUT Clermont-Ferrand 2022. (Période 
 
 [GitHub du prof](https://github.com/AdrienVacataireIUT/)
 
+## Notation
+- **6 points** - Respect des consignes
+  - [ ] arborescence
+  - [ ] le projet complie
+  - [ ] commentaires
+  - [ ] règle de nommage
+
+- **25 points** - Couche d'accès aux donnés
+  - [ ] 5 point sur les tests (un crud complet)
+
+- **20 points** - Projet WPF
+
+- **40 points** - Projet MVC
+
+- **6 points** - Bonus
+
 ## Commandes utiles
 Pour éviter de recommit la base et les config
 ```
