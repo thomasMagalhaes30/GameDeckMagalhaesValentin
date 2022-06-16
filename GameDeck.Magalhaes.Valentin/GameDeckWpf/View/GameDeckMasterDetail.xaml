@@ -57,12 +57,14 @@
             <Border DockPanel.Dock="Left" BorderThickness="0,0,1,0" BorderBrush="DimGray">
                 <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
                     <Label HorizontalAlignment="Left" Content="Cathégorie"/>
+                              <!--SelectedValue="{Binding CurrentGenreId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValuePath="id"-->
                     <ComboBox DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
-                          IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
-                          ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                              IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Cmb_CategorieItemChangedCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}, Path=SelectedItem}"/>
+                                <i:InvokeCommandAction Command="{Binding Cmb_CategorieItemChangedCMD}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ComboBox>
@@ -177,10 +179,12 @@
                             <Label Grid.Column="0" 
                                    Content="Date de sortie"/>
                             <StackPanel>
-                                <!--PreviewTextInput=""-->
-                                <DatePicker Grid.Column="1" 
+                                <!--<DatePicker Grid.Column="1" 
+                                            Text="{Binding RelativeSource={RelativeSource Self}, Path=SelectedDate, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}"
                                             SelectedDate="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                            IsEnabled="{Binding IsReadOnly, Converter={StaticResource RevertBool}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">-->
+                                <!--<DatePicker Grid.Column="1" 
+                                            SelectedDate="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                             Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectedDateChanged">
@@ -190,7 +194,15 @@
                                 </DatePicker>
                                 <TextBox Grid.Column="1"  IsReadOnly="True"
                                      Text="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, ConverterCulture=fr-FR, StringFormat=d}"
-                                     Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}"/>-->
+                                <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                                         Text="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=LostFocus, Mode=TwoWay, ConverterCulture=fr-FR, StringFormat=d}">
+                                    <!--<i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="LostFocus">
+                                            <i:InvokeCommandAction Command="{Binding Dp_DateSortieLostFocusCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Text}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>-->
+                                </TextBox>
                             </StackPanel>
 
                         </WrapPanel>

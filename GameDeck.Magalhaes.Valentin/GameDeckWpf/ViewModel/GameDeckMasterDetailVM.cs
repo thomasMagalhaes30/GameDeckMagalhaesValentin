@@ -4,6 +4,7 @@ using GameDeckWpf.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,12 +39,13 @@ namespace GameDeckWpf.ViewModel
             {
                 _CurrentGame = value;
                 OnPropertyChanged();
-                //MessageBox.Show(CurrentGame?.Id.ToString());
+                if (CurrentGame != null)
+                    CurrentGame.PropertyChanged += CurrentGame_PropertyChanged;
             }
         }
 
-        private int _currentGenreId;
-        public int CurrentGenreId
+        private int? _currentGenreId;
+        public int? CurrentGenreId
         {
             get => _currentGenreId;
             set
@@ -286,7 +288,23 @@ namespace GameDeckWpf.ViewModel
 
         private void LoadGamesList()
         {
+            CurrentGenreId = null;
             GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux(true).Select(j => j?.ToViewModel()));
+        }
+
+        private void CurrentGame_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            DateTime minDate = new DateTime(1970, 1, 1);    // Date minimum en base de données 
+            DateTime maxDate = new DateTime(2999, 12, 30);
+
+            if (e.PropertyName == nameof(JeuVM.DateSortie) && CurrentGame.DateSortie != null) // && CurrentGame.DateSortie != minDate && CurrentGame.DateSortie != maxDate
+            {
+                if (CurrentGame.DateSortie < minDate)
+                    CurrentGame.DateSortie = minDate;
+
+                if (CurrentGame.DateSortie > maxDate)
+                    CurrentGame.DateSortie = maxDate;
+            }
         }
     }
 }
