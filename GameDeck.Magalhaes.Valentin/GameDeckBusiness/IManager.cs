@@ -161,7 +161,7 @@ namespace GameDeckBusiness
         /// Obtient une liste de <see cref="JeuDto"/>.
         /// </summary>
         /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
-        List<JeuDto> GetAllJeux();
+        List<JeuDto> GetAllJeux(bool includeAll = false);
 
         /// <summary>
         /// Obtient un <see cref="JeuDto"/> par son identifiant.

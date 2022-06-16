@@ -150,10 +150,10 @@
                             <ComboBox DisplayMemberPath="Nom" Grid.Column="1" StaysOpenOnEdit="True" IsEditable="True" 
                                       Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedValue="{Binding Path=CurrentGame.EditeurId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedValuePath="Id"
-                                      SelectedItem="{Binding Path=CurrentGame.Editeur.Nom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      SelectedItem="{Binding Path=CurrentGame.Editeur, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       ItemsSource="{Binding EditeursList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Column="1" 
-                                     Text="{Binding CurrentGame.Editeur, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                     Text="{Binding CurrentGame.Editeur.Nom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                         </StackPanel>
                     </WrapPanel>
@@ -168,7 +168,7 @@
                                       SelectedItem="{Binding Path=CurrentGame.Genre, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                       ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBox Grid.Column="1" 
-                                     Text="{Binding CurrentGame.Editeur.Nom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                     Text="{Binding CurrentGame.Genre.Nom, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
                         </StackPanel>
                     </WrapPanel>

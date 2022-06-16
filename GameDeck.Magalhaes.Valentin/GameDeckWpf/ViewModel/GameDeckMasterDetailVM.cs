@@ -213,7 +213,7 @@ namespace GameDeckWpf.ViewModel
 
         private void DpDateSortieLostFocus(object stringDate)
         {
-            DateTime minDate = new DateTime(1970, 1, 1);
+            DateTime minDate = new DateTime(1970, 1, 1);    // Date minimum en base de données 
             DateTime maxDate = new DateTime(2999, 12, 30);
 
             if (!(stringDate is string sdate))
@@ -235,7 +235,7 @@ namespace GameDeckWpf.ViewModel
 
         private void LoadGamesList()
         {
-            GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux().Select(j => j?.ToViewModel()));
+            GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux(true).Select(j => j?.ToViewModel()));
         }
     }
 }

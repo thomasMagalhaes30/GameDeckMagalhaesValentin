@@ -272,11 +272,21 @@ namespace GameDeckBusiness
         /// Obtient une liste de <see cref="JeuDto"/>.
         /// </summary>
         /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
-        public List<JeuDto> GetAllJeux()
+        public List<JeuDto> GetAllJeux(bool includeAll = false)
         {
-            return JeuConverter.ConvertToDto(
-                new JeuQuery(_context).GetAll().ToList()
-            );
+            IQueryable<Modele.Entities.Jeu> query = new JeuQuery(_context).GetAll();
+
+            if (includeAll)
+                query = query
+                    .Include(jeu => jeu.GenreObj)
+                    .Include(jeu => jeu.EditeurObj)
+                    .Include(jeu => jeu.Evaluations)
+                    .Include(jeu => jeu.Experiences);
+
+            return query.ToList().Select(j => JeuConverter.ConvertToDto(j)).ToList();
+            //return JeuConverter.ConvertToDto(
+            //    query.ToList()
+            //);
         }
 
         /// <summary>
