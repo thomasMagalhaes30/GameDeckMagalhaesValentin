@@ -57,17 +57,30 @@
             <Border DockPanel.Dock="Left" BorderThickness="0,0,1,0" BorderBrush="DimGray">
                 <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
                     <Label HorizontalAlignment="Left" Content="Cathégorie"/>
-                              <!--SelectedValue="{Binding CurrentGenreId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectedValuePath="id"-->
-                    <ComboBox DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
-                              IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                    <WrapPanel Orientation="Horizontal">
+                        <Border BorderThickness="1,1,0,1" CornerRadius="1,0,0,1" BorderBrush="LightSlateGray" Background="LightGray">
+                            <ComboBox Name="CmbCategorie" BorderThickness="0" Background="Transparent" DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
+                                  MinWidth="130"
+                              IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}" 
                               ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Cmb_CategorieItemChangedCMD}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ComboBox>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding Cmb_CategorieItemChangedCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                        </Border>
+                        <Border BorderThickness="0,1,1,1" CornerRadius="0,1,1,0" BorderBrush="LightSlateGray">
+                            <Button Background="Transparent" BorderThickness="0" MinWidth="20" VerticalContentAlignment="Center"
+                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontWeight="Bold" FontFamily="console" Content="X">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding Btn_Categorie}" CommandParameter="{Binding ElementName=CmbCategorie}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </Border>
+                    </WrapPanel>
                     <ListView VerticalAlignment="Stretch" IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding CurrentGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                       ItemsSource="{Binding GamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

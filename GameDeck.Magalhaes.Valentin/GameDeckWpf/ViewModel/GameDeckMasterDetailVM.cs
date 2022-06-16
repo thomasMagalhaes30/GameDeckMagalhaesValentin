@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using static GameDeckBusiness.Util.ManagerUtil;
 
@@ -44,16 +45,16 @@ namespace GameDeckWpf.ViewModel
             }
         }
 
-        private int? _currentGenreId;
-        public int? CurrentGenreId
-        {
-            get => _currentGenreId;
-            set
-            {
-                _currentGenreId = value;
-                OnPropertyChanged();
-            }
-        }
+        //private int? _currentGenreId;
+        //public int? CurrentGenreId
+        //{
+        //    get => _currentGenreId;
+        //    set
+        //    {
+        //        _currentGenreId = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         private bool _isReadOnly;
         public bool IsReadOnly
@@ -139,6 +140,9 @@ namespace GameDeckWpf.ViewModel
 
         private RelayCommand _dp_DateSortieLostFocusCMD;
         public RelayCommand Dp_DateSortieLostFocusCMD => _dp_DateSortieLostFocusCMD ?? (_dp_DateSortieLostFocusCMD = new RelayCommand(c => DpDateSortieLostFocus(c)));
+
+        private RelayCommand _btn_Categorie;
+        public RelayCommand Btn_Categorie => _btn_Categorie ?? (_btn_Categorie = new RelayCommand(c => BtnCategorie(c)));
         #endregion
 
         #region [ Construct ]
@@ -192,17 +196,20 @@ namespace GameDeckWpf.ViewModel
                     GetManager().UpdateJeu(CurrentGame?.ToDto());
                 if (CurrentAction == ActionEnum.AJOUTER)
                     CurrentGame.Id = GetManager().AddJeu(CurrentGame?.ToDto());
+
+                int Id = CurrentGame?.Id ?? 0;
+
+                GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux(true).Where(g => g.GenreId == CurrentGame.GenreId).Select(j => j?.ToViewModel()));
+                //LoadGamesList();
+                CurrentAction = ActionEnum.CONSULTER;
+                CurrentGame = GamesList.SingleOrDefault(g => g.Id == Id);
             }
             catch (Exception e)
             {
                 MessageBox.Show("Erreur lors de la sauvegarde : " + e.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                LoadGamesList();
+                CurrentGame = GamesList.FirstOrDefault();
             }
-
-            int Id = CurrentGame?.Id ?? 0;
-
-            LoadGamesList();
-            CurrentAction = ActionEnum.CONSULTER;
-            CurrentGame = GamesList.SingleOrDefault(g => g.Id == Id);
         }
 
         /// <summary>
@@ -284,11 +291,21 @@ namespace GameDeckWpf.ViewModel
             }
             catch { }
         }
+
+        private void BtnCategorie(object CmbCategorie)
+        {
+            //try
+            //{
+            //    ComboBox cmb = (ComboBox)CmbCategorie;
+            //    cmb.SelectedItem = null;
+            //    LoadGamesList();
+            //}
+            //catch (Exception) { }
+        }
         #endregion
 
         private void LoadGamesList()
         {
-            CurrentGenreId = null;
             GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux(true).Select(j => j?.ToViewModel()));
         }
 
