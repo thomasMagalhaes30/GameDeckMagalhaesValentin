@@ -137,5 +137,13 @@ namespace GameDeckWpf.ViewModel
                 _experiences = value; OnPropertyChanged();
             }
         }
+
+        /// <summary>
+        /// Constructeur de base de <see cref="JeuVM"/> permettant de mettre la date de sortie à la date du jour par défaut.
+        /// </summary>
+        public JeuVM()
+        {
+            DateSortie = DateTime.Today;
+        }
     }
 }

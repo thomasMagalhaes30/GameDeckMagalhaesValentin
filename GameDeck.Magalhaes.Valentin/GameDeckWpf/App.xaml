@@ -8,6 +8,14 @@
         <converter:BoolToVisibilityConverter x:Key="boolToVisibility"/>
         <converter:BoolToVisibilityRevertConverter x:Key="boolToVisibilityRevert"/>
         <converter:BoolToReverteBoolConverter x:Key="RevertBool"/>
+        <converter:StringToDateConverter x:Key="StringToDate"/>
+        <converter:DateToStringConverter x:Key="DateToString"/>
 
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="2"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
     </Application.Resources>
 </Application>

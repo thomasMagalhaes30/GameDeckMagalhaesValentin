@@ -132,8 +132,8 @@ namespace GameDeckWpf.ViewModel
         private RelayCommand _BtnSupprimer_CMD;
         public RelayCommand BtnSupprimer_CMD => _BtnSupprimer_CMD ?? (_BtnSupprimer_CMD = new RelayCommand(c => BtnSupprimer()));
 
-        private RelayCommand _cmb_CathegorieItemChangedCMD;
-        public RelayCommand Cmb_CathegorieItemChangedCMD => _cmb_CathegorieItemChangedCMD ?? (_cmb_CathegorieItemChangedCMD = new RelayCommand(c => CmbCathegorieItemChanged(c)));
+        private RelayCommand _cmb_CategorieItemChangedCMD;
+        public RelayCommand Cmb_CategorieItemChangedCMD => _cmb_CategorieItemChangedCMD ?? (_cmb_CategorieItemChangedCMD = new RelayCommand(c => CmbCategorieItemChanged(c)));
 
         private RelayCommand _dp_DateSortieLostFocusCMD;
         public RelayCommand Dp_DateSortieLostFocusCMD => _dp_DateSortieLostFocusCMD ?? (_dp_DateSortieLostFocusCMD = new RelayCommand(c => DpDateSortieLostFocus(c)));
@@ -157,24 +157,44 @@ namespace GameDeckWpf.ViewModel
 
         #region [ Commands ]
 
+        /// <summary>
+        /// Action associée au bouton modifier:
+        /// passe en mode d'édition.
+        /// </summary>
         private void BtnModifier()
         {
             if (CurrentGame != null)
                 CurrentAction = ActionEnum.MODIFIER;
         }
 
+        /// <summary>
+        /// Action associée au bouton ajouter:
+        /// passe en mode création de jeu.
+        /// </summary>
         private void BtnAjouter()
         {
             CurrentAction = ActionEnum.AJOUTER;
             CurrentGame = new JeuVM();
         }
 
+        /// <summary>
+        /// Action associée au bouton enregistrer:
+        /// Enregistre le jeu en base (édition / creation),
+        /// rafraichi l'affichage et repasse en consultation.
+        /// </summary>
         private void BtnEnregistrer()
         {
-            if (CurrentAction == ActionEnum.MODIFIER)
-                GetManager().UpdateJeu(CurrentGame?.ToDto());
-            if (CurrentAction == ActionEnum.AJOUTER)
-                CurrentGame.Id = GetManager().AddJeu(CurrentGame?.ToDto());
+            try
+            {
+                if (CurrentAction == ActionEnum.MODIFIER)
+                    GetManager().UpdateJeu(CurrentGame?.ToDto());
+                if (CurrentAction == ActionEnum.AJOUTER)
+                    CurrentGame.Id = GetManager().AddJeu(CurrentGame?.ToDto());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Erreur lors de la sauvegarde : " + e.Message, "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             int Id = CurrentGame?.Id ?? 0;
 
@@ -183,22 +203,44 @@ namespace GameDeckWpf.ViewModel
             CurrentGame = GamesList.SingleOrDefault(g => g.Id == Id);
         }
 
+        /// <summary>
+        /// Action associée au bouton annuler: 
+        /// en modification reprend le jeu dans son état précédent (avant sauvegarde),
+        /// en création, reprend le premier jeu de la liste comme jeu courrant,
+        /// et repasse en consultation.
+        /// </summary>
         private void BtnAnnuler()
         {
-            if (CurrentAction == ActionEnum.MODIFIER)
+            // plus intéressant que de récupérer le jeu en base (multi-user / remettre propre) car liste peut avoir bougé aussi !
+            LoadGamesList();
+
+            if (CurrentAction == ActionEnum.MODIFIER && CurrentGame != null)
                 CurrentGame = GamesList?.SingleOrDefault(g => g?.Id == CurrentGame.Id);
             else
                 CurrentGame = GamesList?.FirstOrDefault();
 
             CurrentAction = ActionEnum.CONSULTER;
         }
+
+        /// <summary>
+        /// Action associée au bouton supprimer:
+        /// supprime le jeu sélectionné.
+        /// </summary>
         private void BtnSupprimer()
         {
-            GetManager().DeleteJeu(CurrentGame.Id);
-            LoadGamesList();
+            if (CurrentGame != null) // TODO CanExecute
+            {
+                GetManager().DeleteJeu(CurrentGame.Id);
+                LoadGamesList();
+                CurrentGame = GamesList?.FirstOrDefault();
+            }
         }
 
-        private void CmbCathegorieItemChanged(object selectedCategorie)
+        /// <summary>
+        /// Action associée au changement de selection de la combobox catégorie :
+        /// rafraichi la liste en fonction de la catégorie sélectionnée (null => tout afficher)
+        /// </summary>
+        private void CmbCategorieItemChanged(object selectedCategorie)
         {
             if (!(selectedCategorie is GenreVM genre))
             {
@@ -211,25 +253,34 @@ namespace GameDeckWpf.ViewModel
             CurrentGame = GamesList.FirstOrDefault();
         }
 
+        /// <summary>
+        /// Action associée au changement de selection du date picker de date de sortie :
+        /// gère la valeur min et max
+        /// </summary>
         private void DpDateSortieLostFocus(object stringDate)
         {
             DateTime minDate = new DateTime(1970, 1, 1);    // Date minimum en base de données 
             DateTime maxDate = new DateTime(2999, 12, 30);
 
             if (!(stringDate is string sdate))
+            //if (!(stringDate is string sdate) || string.IsNullOrEmpty(sdate))
             {
-                LoadGamesList();
+                //LoadGamesList(); // TODO ça vire ?
                 return;
             }
 
-            List<int> d = sdate.Split('/').Select(v => int.Parse(v)).ToList();
-            DateTime date = new DateTime(d[2], d[1], d[0]);
+            try
+            {
+                List<int> d = sdate.Split('/').Select(v => int.Parse(v)).ToList();
+                DateTime date = new DateTime(d[2], d[1], d[0]);
 
-            if (date < minDate)
-                CurrentGame.DateSortie = minDate;
-            
-            if (date > maxDate)
-                CurrentGame.DateSortie = maxDate;
+                if (date < minDate)
+                    CurrentGame.DateSortie = minDate;
+
+                if (date > maxDate)
+                    CurrentGame.DateSortie = maxDate;
+            }
+            catch { }
         }
         #endregion
 

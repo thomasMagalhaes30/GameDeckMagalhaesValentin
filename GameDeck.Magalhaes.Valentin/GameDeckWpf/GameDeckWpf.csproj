@@ -71,6 +71,8 @@
     <Compile Include="Converter\BoolToReverteBoolConverter.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\BoolToVisibilityRevertConverter.cs" />
+    <Compile Include="Converter\DateToStringConverter.cs" />
+    <Compile Include="Converter\StringToDateConverter.cs" />
     <Compile Include="Enum\ActionEnum.cs" />
     <Compile Include="Extensions\EditeurDtoExtension.cs" />
     <Compile Include="Extensions\EditeurVMExtension.cs" />
