@@ -30,6 +30,7 @@ git update-index --skip-worktree Modele/GameDeckDb_log.ldf
 
 git update-index --skip-worktree GameDeckConsole/App.config
 git update-index --skip-worktree GameDeckWpf/App.config
+git update-index --skip-worktree GameDeckTest/App.config
 git update-index --skip-worktree GameDeckWebApplication/Web.config
 ```
 
