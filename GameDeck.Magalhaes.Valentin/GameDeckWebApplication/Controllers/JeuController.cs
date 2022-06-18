@@ -16,6 +16,17 @@ namespace GameDeckWebApplication.Controllers
             return View(JeuAdapter.ConvertToVM(dtos));
         }
 
+        public ActionResult Detail(int id)
+        {
+            JeuDto dto = Manager.GetInstance().GetOneJeu(id);
+
+            JeuVM vm = JeuAdapter.ConvertToVM(dto);
+            // récupérer l'url précédente et la stocker dans le viewmodel
+            vm.PreviousUrl = System.Web.HttpContext.Current.Request.UrlReferrer?.LocalPath;
+
+            return View(vm);
+        }
+
         public ActionResult Edit(int? id)
         {
             JeuDto dto = new JeuDto();
