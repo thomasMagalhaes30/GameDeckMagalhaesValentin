@@ -272,7 +272,7 @@ namespace GameDeckBusiness
         /// Obtient une liste de <see cref="JeuDto"/>.
         /// </summary>
         /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
-        public List<JeuDto> GetAllJeux(bool includeAll = false)
+        public List<JeuDto> GetAllJeux(bool includeAll = false, Func<JeuDto, bool> wherePredicate = null)
         {
             IQueryable<Modele.Entities.Jeu> query = new JeuQuery(_context).GetAll();
 
@@ -283,10 +283,11 @@ namespace GameDeckBusiness
                     .Include(jeu => jeu.Evaluations)
                     .Include(jeu => jeu.Experiences);
 
+            if (wherePredicate != null)
+                return query.ToList().Select(j => JeuConverter.ConvertToDto(j)).Where(wherePredicate).ToList();
+
+            // Premier .ToList() nécessaire sinon expression interprété par linq => ne connait pas ConvertToDto().
             return query.ToList().Select(j => JeuConverter.ConvertToDto(j)).ToList();
-            //return JeuConverter.ConvertToDto(
-            //    query.ToList()
-            //);
         }
 
         /// <summary>

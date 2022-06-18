@@ -2,6 +2,7 @@
 using GameDeckDto;
 using Modele;
 using Modele.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace GameDeckBusiness
@@ -161,7 +162,7 @@ namespace GameDeckBusiness
         /// Obtient une liste de <see cref="JeuDto"/>.
         /// </summary>
         /// <returns>Une liste de <see cref="JeuDto"/>.</returns>
-        List<JeuDto> GetAllJeux(bool includeAll = false);
+        List<JeuDto> GetAllJeux(bool includeAll = false, Func<JeuDto, bool> wherePredicate = null);
 
         /// <summary>
         /// Obtient un <see cref="JeuDto"/> par son identifiant.

@@ -56,7 +56,7 @@
 
             <Border DockPanel.Dock="Left" BorderThickness="0,0,1,0" BorderBrush="DimGray">
                 <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
-                    <Label HorizontalAlignment="Left" Content="Cathégorie"/>
+                    <Label HorizontalAlignment="Left" Content="Catégorie"/>
                     <WrapPanel Orientation="Horizontal">
                         <Border BorderThickness="1,1,0,1" CornerRadius="1,0,0,1" BorderBrush="LightSlateGray" Background="LightGray">
                             <ComboBox Name="CmbCategorie" BorderThickness="0" Background="Transparent" DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
@@ -134,11 +134,11 @@
                         <Setter Property="Height" Value="25"/>
                         <Setter Property="VerticalAlignment" Value="Center"/>
                     </Style>
-                    <Style TargetType="DatePicker">
+                    <!--<Style TargetType="DatePicker">
                         <Setter Property="Width" Value="125"/>
                         <Setter Property="Height" Value="25"/>
                         <Setter Property="VerticalAlignment" Value="Center"/>
-                    </Style>
+                    </Style>-->
                 </ScrollViewer.Resources>
 
                 <StackPanel Margin="15,5">
@@ -230,6 +230,61 @@
                          Text="{Binding CurrentGame.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                          IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
+
+
+                    <StackPanel Margin="0,10,0,0" Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DockPanel>
+                            <Label DockPanel.Dock="Right" Content="{Binding AverageNote, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <Label DockPanel.Dock="Left" Content="Evaluations"/>
+                        </DockPanel>
+
+                        <Border MinHeight="175">
+                            <Grid Background="Transparent">
+                                <ListView Name="lv_Evaluations" VerticalAlignment="Stretch" 
+                                      Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=HasItems, Converter={StaticResource boolToVisibility}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding CurrentGame.Evaluations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                            <Setter Property="BorderBrush" Value="DimGray"/>
+                                            <Setter Property="Margin" Value="0,0,0,1"/>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel>
+                                                <TextBlock DockPanel.Dock="Right" FontWeight="Bold" Text="{Binding Note}"/>
+                                                <StackPanel DockPanel.Dock="Left">
+                                                    <TextBlock FontWeight="Bold" Text="{Binding NomEvaluateur}"/>
+                                                    <TextBlock FontSize="10" Text="{Binding Editeur.Date}"/>
+                                                </StackPanel>
+                                            </DockPanel>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                <Grid 
+                                Visibility="{Binding ElementName=lv_Evaluations, Converter={StaticResource boolToVisibilityRevert}, Path=HasItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                >
+                                    <Label Content="Il n'y a rien à voir ici..." MinWidth="300" FontSize="25"
+                                       HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                       HorizontalContentAlignment="Center" Margin="10">
+                                        <Label.Foreground>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="Yellow" Offset="0.0" />
+                                                <GradientStop Color="Red" Offset="0.25" />
+                                                <GradientStop Color="Blue" Offset="0.75" />
+                                                <GradientStop Color="LimeGreen" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Label.Foreground>
+                                    </Label>
+                                    <Image Source="/Image/david_goodenough.png"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+
                 </StackPanel>
 
             </ScrollViewer>

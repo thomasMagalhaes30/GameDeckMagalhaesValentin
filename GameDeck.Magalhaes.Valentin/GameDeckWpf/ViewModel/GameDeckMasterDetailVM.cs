@@ -40,9 +40,21 @@ namespace GameDeckWpf.ViewModel
             {
                 _CurrentGame = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(AverageNote));
                 if (CurrentGame != null)
                     CurrentGame.PropertyChanged += CurrentGame_PropertyChanged;
             }
+        }
+
+        private float? _averageNote;
+        public float? AverageNote
+        {
+            get => CurrentGame?.Evaluations != null && CurrentGame?.Evaluations.Count > 0 ? (CurrentGame?.Evaluations?.Average(e => e?.Note ?? 0)) : null;
+            //set
+            //{
+            //    _averageNote = value;
+            //    OnPropertyChanged();
+            //}
         }
 
         //private int? _currentGenreId;
@@ -118,10 +130,7 @@ namespace GameDeckWpf.ViewModel
         #region [ Commands ]
 
         private RelayCommand _btnModifier_CMD;
-        public RelayCommand BtnModifier_CMD
-        {
-            get => _btnModifier_CMD ?? (_btnModifier_CMD = new RelayCommand(c => BtnModifier()));
-        }
+        public RelayCommand BtnModifier_CMD => _btnModifier_CMD ?? (_btnModifier_CMD = new RelayCommand(c => BtnModifier()));
 
         private RelayCommand _btnAjouter_CMD;
         public RelayCommand BtnAjouter_CMD => _btnAjouter_CMD ?? (_btnAjouter_CMD = new RelayCommand(c => BtnAjouter()));
@@ -199,8 +208,8 @@ namespace GameDeckWpf.ViewModel
 
                 int Id = CurrentGame?.Id ?? 0;
 
-                GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux(true).Where(g => g.GenreId == CurrentGame.GenreId).Select(j => j?.ToViewModel()));
-                //LoadGamesList();
+                //GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux(true).Where(g => g.GenreId == CurrentGame.GenreId).Select(j => j?.ToViewModel()));
+                LoadGamesList();
                 CurrentAction = ActionEnum.CONSULTER;
                 CurrentGame = GamesList.SingleOrDefault(g => g.Id == Id);
             }
@@ -257,7 +266,8 @@ namespace GameDeckWpf.ViewModel
                 return;
             }
 
-            GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux().Where(g => g.GenreId == genre?.Id).Select(j => j?.ToViewModel()));
+            //GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux().Where(g => g.GenreId == genre?.Id).Select(j => j?.ToViewModel()));
+            LoadGamesList(g => g.GenreId == genre?.Id);
 
             CurrentGame = GamesList.FirstOrDefault();
         }
@@ -304,10 +314,21 @@ namespace GameDeckWpf.ViewModel
         }
         #endregion
 
-        private void LoadGamesList()
+        #region [ Methodes ]
+
+        private void LoadGamesList(Func<JeuDto, bool> wherePredicate = null)
         {
-            GamesList = new ObservableCollection<JeuVM>(GetManager().GetAllJeux(true).Select(j => j?.ToViewModel()));
+            GamesList = new ObservableCollection<JeuVM>(
+                GetManager()
+                .GetAllJeux(true, wherePredicate)
+                .OrderBy(g => g.Nom)
+                .ThenByDescending(g => g.DateSortie)
+                .Select(j => j?.ToViewModel())
+            );
         }
+        #endregion
+
+        #region [ Property changed ]
 
         private void CurrentGame_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -322,6 +343,10 @@ namespace GameDeckWpf.ViewModel
                 if (CurrentGame.DateSortie > maxDate)
                     CurrentGame.DateSortie = maxDate;
             }
+
+            if (e.PropertyName == nameof(JeuVM.Evaluations))
+                OnPropertyChanged(nameof(AverageNote));
         }
+        #endregion
     }
 }
