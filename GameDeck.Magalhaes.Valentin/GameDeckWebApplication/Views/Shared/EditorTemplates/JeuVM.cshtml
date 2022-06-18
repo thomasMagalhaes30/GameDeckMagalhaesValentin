@@ -50,7 +50,7 @@
                 @Html.LabelFor(model => model.GenreId, new { @class = "form-label" })
             </div>
             <div class="col-md-8">
-                @Html.DropDownList(nameof(Model.GenreId), new SelectList(ViewBag.Genres, "Value", "Text"), new { @class = "form-select" })
+                @Html.DropDownList(nameof(Model.GenreId), (SelectList)ViewData["Genres"], new { @class = "form-select" })
                 @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +60,7 @@
                 @Html.LabelFor(model => model.EditeurId, new { @class = "form-label" })
             </div>
             <div class="col-md-8">
-                @Html.DropDownList(nameof(Model.EditeurId), new SelectList(ViewBag.Editeurs, "Value", "Text"), new { @class = "form-select" })
+                @Html.DropDownList(nameof(Model.EditeurId), (SelectList)ViewData["Editeurs"], new { @class = "form-select" })
                 @Html.ValidationMessageFor(model => model.EditeurId, "", new { @class = "text-danger" })
             </div>
         </div>

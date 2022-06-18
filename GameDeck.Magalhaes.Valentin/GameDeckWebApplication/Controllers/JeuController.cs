@@ -23,18 +23,20 @@ namespace GameDeckWebApplication.Controllers
             {
                 dto = Manager.GetInstance().GetOneJeu(id.Value);
             }
-           
+
             // on remplit les view bag qui seront utilisés dans les dropdown
-            ViewBag.Editeurs = Manager.GetInstance().GetAllEditeurs().Select(edi => new SelectListItem {
+            IEnumerable<SelectListItem> lesEditeurs = Manager.GetInstance().GetAllEditeurs().Select(edi => new SelectListItem {
                 Value = edi.Id.ToString(),
                 Text = edi.Nom,
             });
+            ViewData["Editeurs"] = new SelectList(lesEditeurs, "Value", "Text");
 
-            ViewBag.Genres = Manager.GetInstance().GetAllGenres().Select(genre => new SelectListItem
+            IEnumerable <SelectListItem> lesGenres = Manager.GetInstance().GetAllGenres().Select(genre => new SelectListItem
             {
                 Value = genre.Id.ToString(),
                 Text = genre.Nom,
             });
+            ViewData["Genres"] = new SelectList(lesGenres, "Value", "Text");
 
             JeuVM vm = JeuAdapter.ConvertToVM(dto);
             // récupérer l'url précédente et la stocker dans le viewmodel
