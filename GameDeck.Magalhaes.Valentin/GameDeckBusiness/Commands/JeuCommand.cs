@@ -15,23 +15,13 @@ namespace GameDeckBusiness.Commands
     {
         public JeuCommand(Context context) : base(context) { }
 
-        /// <summary>
-        /// Met à jour un <see cref="Jeu"/> déjà présent en base à partir du contexte
-        /// </summary>
-        /// <param name="Jeu">jeu à modifier</param>
-        public void Update(Jeu jeu)
+        public override void changeEntiteBddWithEntite(Jeu entiteBdd, Jeu newEntite)
         {
-            Jeu updateJeu = GetEntityById(jeu.Id);
-            if (updateJeu == null)
-                return;
-
-            updateJeu.Nom = jeu.Nom;
-            updateJeu.Description = jeu.Description;
-            updateJeu.DateSortie = jeu.DateSortie;
-            updateJeu.GenreId = jeu.GenreId;
-            updateJeu.EditeurId = jeu.EditeurId;
-
-            _context.SaveChanges();
+            entiteBdd.Nom = newEntite.Nom;
+            entiteBdd.Description = newEntite.Description;
+            entiteBdd.DateSortie = newEntite.DateSortie;
+            entiteBdd.GenreId = newEntite.GenreId;
+            entiteBdd.EditeurId = newEntite.EditeurId;
         }
     }
 }

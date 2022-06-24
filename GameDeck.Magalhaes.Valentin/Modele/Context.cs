@@ -1,5 +1,6 @@
 ﻿using Modele.Entities;
 using Modele.Mappings;
+using System;
 using System.Data.Entity;
 
 namespace Modele
@@ -7,13 +8,18 @@ namespace Modele
     /// <summary>
     /// Représente le contexte EF héritant de la classe DbContext.
     /// </summary>
-    public class Context : DbContext
+    public class Context : DbContext, IDisposable
     {
         public Context() : base("name=ConnexionString")
         {
             // A remplacer par DropCreateDatabaseIfModelChanges puis par null
             //Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Context>());
+        }
+
+        public new void Dispose()
+        {
+            Dispose(true);
         }
 
         /// <summary>

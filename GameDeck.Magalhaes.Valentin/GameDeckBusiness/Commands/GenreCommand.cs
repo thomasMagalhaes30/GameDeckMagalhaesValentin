@@ -15,18 +15,10 @@ namespace GameDeckBusiness.Commands
     {
         public GenreCommand(Context context) : base(context) { }
 
-        /// <summary>
-        /// Met à jour un <see cref="Genre"/> déjà présent en base à partir du contexte
-        /// </summary>
-        /// <param name="genre">Genre à modifier</param>
-        public void Update(Genre genre)
+        public override void changeEntiteBddWithEntite(Genre entiteBdd, Genre newEntite)
         {
-            Genre updateGenre = GetEntityById(genre.Id);
-            if (updateGenre == null)
-                return;
-
-            updateGenre.Nom = genre.Nom;
-            _context.SaveChanges();
+            entiteBdd.Nom = newEntite.Nom;
         }
+
     }
 }

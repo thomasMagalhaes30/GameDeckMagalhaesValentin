@@ -15,22 +15,12 @@ namespace GameDeckBusiness.Commands
     {
         public ExperienceCommand(Context context) : base(context) { }
 
-        /// <summary>
-        /// Met à jour un <see cref="Experience"/> déjà présent en base à partir du contexte
-        /// </summary>
-        /// <param name="experience">Experience à modifier</param>
-        public void Update(Experience experience)
+        public override void changeEntiteBddWithEntite(Experience entiteBdd, Experience newEntite)
         {
-            Experience updateExperience = GetEntityById(experience.Id);
-            if (updateExperience == null)
-                return;
-
-            updateExperience.Joueur = experience.Joueur;
-            updateExperience.TempsJeu = experience.TempsJeu;
-            updateExperience.Pourcentage = experience.Pourcentage;
-            updateExperience.JeuId = experience.JeuId;
-
-            _context.SaveChanges();
+            entiteBdd.Joueur = newEntite.Joueur;
+            entiteBdd.TempsJeu = newEntite.TempsJeu;
+            entiteBdd.Pourcentage = newEntite.Pourcentage;
+            entiteBdd.JeuId = newEntite.JeuId;
         }
     }
 }

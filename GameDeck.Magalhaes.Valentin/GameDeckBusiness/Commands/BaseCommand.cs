@@ -2,6 +2,7 @@
 using Modele.Entities;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GameDeckBusiness.Commands
 {
@@ -36,10 +37,10 @@ namespace GameDeckBusiness.Commands
         /// </summary>
         /// <param name="T">Entite à ajouter</param>
         /// <returns>Identifiant de l'entite ajouté</returns>
-        public int Add(T entite)
+        public async Task<int> Add(T entite)
         {
             GetDbSet().Add(entite);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return entite.Id; // oui oui c'est bien comme ça
         }
 
@@ -47,7 +48,7 @@ namespace GameDeckBusiness.Commands
         /// Supprimer une entité en base à partir du contexte et de son identifiant
         /// </summary>
         /// <param name="id">Identifiant de l'entite à supprimer</param>
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             T delEntite = GetEntityById(id);
             if (delEntite == null)
@@ -55,8 +56,29 @@ namespace GameDeckBusiness.Commands
 
             GetDbSet().Remove(delEntite);
             // on sauvegarde que si on retire l'entite
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Met à jour une entité déjà présent en base à partir du contexte
+        /// </summary>
+        /// <param name="T">Entite à modifier</param>
+        public async Task Update(T entite)
+        {
+            T entiteBdd = GetEntityById(entite.Id);
+            if (entiteBdd == null)
+                return;
+
+            changeEntiteBddWithEntite(entiteBdd, entite);
+            await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Met à jour l'entite de la base à partir d'une autre entité
+        /// </summary>
+        /// <param name="entiteBdd">l'entité en base</param>
+        /// <param name="newEntite">la nouvelle entité</param>
+        public abstract void changeEntiteBddWithEntite(T entiteBdd, T newEntite);
 
         #endregion
     }

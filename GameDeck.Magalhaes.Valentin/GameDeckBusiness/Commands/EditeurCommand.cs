@@ -15,18 +15,9 @@ namespace GameDeckBusiness.Commands
     {
         public EditeurCommand(Context context) : base(context) { }
 
-        /// <summary>
-        /// Met à jour un <see cref="Editeur"/> déjà présent en base à partir du contexte
-        /// </summary>
-        /// <param name="editeur">Editeur à modifier</param>
-        public void Update(Editeur editeur)
+        public override void changeEntiteBddWithEntite(Editeur entiteBdd, Editeur newEntite)
         {
-            Editeur updateEditeur = GetEntityById(editeur.Id);
-            if (updateEditeur == null)
-                return;
-
-            updateEditeur.Nom = editeur.Nom;
-            _context.SaveChanges();
+            entiteBdd.Nom = newEntite.Nom;
         }
     }
 }

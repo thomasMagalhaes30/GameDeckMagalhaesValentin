@@ -15,21 +15,12 @@ namespace GameDeckBusiness.Commands
     {
         public EvaluationCommand(Context context) : base(context) { }
 
-        /// <summary>
-        /// Met à jour un <see cref="Evaluation"/> déjà présent en base à partir du contexte
-        /// </summary>
-        /// <param name="evaluation">Evaluation à modifier</param>
-        public void Update(Evaluation evaluation)
+        public override void changeEntiteBddWithEntite(Evaluation entiteBdd, Evaluation newEntite)
         {
-            Evaluation updateEvaluation = GetEntityById(evaluation.Id);
-            if (updateEvaluation == null)
-                return;
-
-            updateEvaluation.NomEvaluateur = evaluation.NomEvaluateur;
-            updateEvaluation.Date = evaluation.Date;
-            updateEvaluation.Note = evaluation.Note;
-            updateEvaluation.JeuId = evaluation.JeuId;
-            _context.SaveChanges();
+            entiteBdd.NomEvaluateur = newEntite.NomEvaluateur;
+            entiteBdd.Date = newEntite.Date;
+            entiteBdd.Note = newEntite.Note;
+            entiteBdd.JeuId = newEntite.JeuId;
         }
     }
 }
