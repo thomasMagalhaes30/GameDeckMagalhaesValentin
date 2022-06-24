@@ -55,35 +55,42 @@
             </Border>
 
             <Border DockPanel.Dock="Left" BorderThickness="0,0,1,0" BorderBrush="DimGray">
-                <StackPanel VerticalAlignment="Stretch" DockPanel.Dock="Left" MinWidth="150">
-                    <Label HorizontalAlignment="Left" Content="Catégorie"/>
-                    <WrapPanel Orientation="Horizontal">
-                        <Border BorderThickness="1,1,0,1" CornerRadius="1,0,0,1" BorderBrush="LightSlateGray" Background="LightGray">
-                            <ComboBox Name="CmbCategorie" BorderThickness="0" Background="Transparent" DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
+                <Grid DockPanel.Dock="Left"  MinWidth="150">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <Label HorizontalAlignment="Left" Content="Catégorie"/>
+                        <WrapPanel Orientation="Horizontal">
+                            <Border BorderThickness="1,1,0,1" CornerRadius="1,0,0,1" BorderBrush="LightSlateGray" Background="LightGray">
+                                <ComboBox Name="CmbCategorie" BorderThickness="0" Background="Transparent" DisplayMemberPath="Nom" StaysOpenOnEdit="True" IsEditable="True"
                                   MinWidth="130"
                               IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}" 
                               ItemsSource="{Binding GenresList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding Cmb_CategorieItemChangedCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </ComboBox>
-                        </Border>
-                        <Border BorderThickness="0,1,1,1" CornerRadius="0,1,1,0" BorderBrush="LightSlateGray">
-                            <Button Background="Transparent" BorderThickness="0" MinWidth="20" VerticalContentAlignment="Center"
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding Cmb_CategorieItemChangedCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}, Path=SelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </ComboBox>
+                            </Border>
+                            <Border BorderThickness="0,1,1,1" CornerRadius="0,1,1,0" BorderBrush="LightSlateGray">
+                                <Button Background="Transparent" BorderThickness="0" MinWidth="20" VerticalContentAlignment="Center"
                                     HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontWeight="Bold" FontFamily="console" Content="X">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding Btn_Categorie}" CommandParameter="{Binding ElementName=CmbCategorie}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Button>
-                        </Border>
-                    </WrapPanel>
-                    <ListView VerticalAlignment="Stretch" IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding CurrentGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                      ItemsSource="{Binding GamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding Btn_Categorie}" CommandParameter="{Binding ElementName=CmbCategorie}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Button>
+                            </Border>
+                        </WrapPanel>
+                    </StackPanel>
+                    <ListView VerticalAlignment="Stretch" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                              IsEnabled="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedItem="{Binding CurrentGame, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              ItemsSource="{Binding GamesList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -101,7 +108,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackPanel>
+                </Grid>
             </Border>
 
             <ScrollViewer DockPanel.Dock="Right" VerticalScrollBarVisibility="Auto">
@@ -192,29 +199,8 @@
                             <Label Grid.Column="0" 
                                    Content="Date de sortie"/>
                             <StackPanel>
-                                <!--<DatePicker Grid.Column="1" 
-                                            Text="{Binding RelativeSource={RelativeSource Self}, Path=SelectedDate, Mode=OneWayToSource, UpdateSourceTrigger=LostFocus}"
-                                            SelectedDate="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                            Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">-->
-                                <!--<DatePicker Grid.Column="1" 
-                                            SelectedDate="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                            Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibilityRevert}, UpdateSourceTrigger=PropertyChanged}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="SelectedDateChanged">
-                                            <i:InvokeCommandAction Command="{Binding Dp_DateSortieLostFocusCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DatePicker}, Path=Text}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </DatePicker>
-                                <TextBox Grid.Column="1"  IsReadOnly="True"
-                                     Text="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, ConverterCulture=fr-FR, StringFormat=d}"
-                                     Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, UpdateSourceTrigger=PropertyChanged}"/>-->
                                 <TextBox Grid.Column="1" IsReadOnly="{Binding IsReadOnly, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                                          Text="{Binding CurrentGame.DateSortie, UpdateSourceTrigger=LostFocus, Mode=TwoWay, ConverterCulture=fr-FR, StringFormat=d}">
-                                    <!--<i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding Dp_DateSortieLostFocusCMD}" CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=TextBox}, Path=Text}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>-->
                                 </TextBox>
                             </StackPanel>
 
@@ -223,18 +209,18 @@
                     </StackPanel>
 
                     <Label Grid.Row="0"
-                       Content="Description"/>
+                           Content="Description"/>
                     <Border>
                         <TextBox MinHeight="50" Width="auto"
-                         VerticalContentAlignment="Top" BorderThickness="0" Background="Transparent"
-                         Text="{Binding CurrentGame.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                         IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 VerticalContentAlignment="Top" BorderThickness="0" Background="Transparent"
+                                 Text="{Binding CurrentGame.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 IsReadOnly="{Binding IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
 
 
                     <StackPanel Margin="0,10,0,0" Visibility="{Binding IsReadOnly, Converter={StaticResource boolToVisibility}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
-                        <DockPanel>
-                            <Label DockPanel.Dock="Right" Content="{Binding AverageNote, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <DockPanel Margin="0,0,2,0">
+                            <Label DockPanel.Dock="Right" Content="{Binding AverageNote, StringFormat={}{0.##}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <Label DockPanel.Dock="Left" Content="Evaluations"/>
                         </DockPanel>
 
@@ -247,6 +233,7 @@
                                     <ListView.ItemContainerStyle>
                                         <Style TargetType="ListViewItem">
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Focusable" Value="False"/>
                                             <Setter Property="BorderThickness" Value="0,0,0,1"/>
                                             <Setter Property="BorderBrush" Value="DimGray"/>
                                             <Setter Property="Margin" Value="0,0,0,1"/>
@@ -255,10 +242,10 @@
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <DockPanel>
-                                                <TextBlock DockPanel.Dock="Right" FontWeight="Bold" Text="{Binding Note}"/>
+                                                <TextBlock DockPanel.Dock="Right" FontWeight="Bold" Text="{Binding Note, StringFormat={}{0:#,0.##}}"/>
                                                 <StackPanel DockPanel.Dock="Left">
                                                     <TextBlock FontWeight="Bold" Text="{Binding NomEvaluateur}"/>
-                                                    <TextBlock FontSize="10" Text="{Binding Editeur.Date}"/>
+                                                    <TextBlock FontSize="10" Text="{Binding Date, ConverterCulture=fr-FR, StringFormat=d}"/>
                                                 </StackPanel>
                                             </DockPanel>
                                         </DataTemplate>

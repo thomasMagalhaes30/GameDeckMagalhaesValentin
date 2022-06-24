@@ -46,15 +46,9 @@ namespace GameDeckWpf.ViewModel
             }
         }
 
-        private float? _averageNote;
         public float? AverageNote
         {
             get => CurrentGame?.Evaluations != null && CurrentGame?.Evaluations.Count > 0 ? (CurrentGame?.Evaluations?.Average(e => e?.Note ?? 0)) : null;
-            //set
-            //{
-            //    _averageNote = value;
-            //    OnPropertyChanged();
-            //}
         }
 
         //private int? _currentGenreId;
