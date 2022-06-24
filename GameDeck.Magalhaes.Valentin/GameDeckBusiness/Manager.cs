@@ -277,14 +277,18 @@ namespace GameDeckBusiness
             IQueryable<Modele.Entities.Jeu> query = new JeuQuery(_context).GetAll();
 
             if (includeAll)
+            {
                 query = query
                     .Include(jeu => jeu.GenreObj)
                     .Include(jeu => jeu.EditeurObj)
                     .Include(jeu => jeu.Evaluations)
                     .Include(jeu => jeu.Experiences);
+            }
 
             if (wherePredicate != null)
+            {
                 return query.ToList().Select(j => JeuConverter.ConvertToDto(j)).Where(wherePredicate).ToList();
+            }
 
             // Premier .ToList() nécessaire sinon expression interprété par linq => ne connait pas ConvertToDto().
             return query.ToList().Select(j => JeuConverter.ConvertToDto(j)).ToList();
@@ -302,10 +306,11 @@ namespace GameDeckBusiness
 
             if (includeAll.HasValue && includeAll.Value)
             {
-                query.Include(jeu => jeu.GenreObj);
-                query.Include(jeu => jeu.EditeurObj);
-                query.Include(jeu => jeu.Evaluations);
-                query.Include(jeu => jeu.Experiences);
+                query = query
+                    .Include(jeu => jeu.GenreObj)
+                    .Include(jeu => jeu.EditeurObj)
+                    .Include(jeu => jeu.Evaluations)
+                    .Include(jeu => jeu.Experiences);
             }
 
             return JeuConverter.ConvertToDto(
