@@ -627,7 +627,7 @@ namespace GameDeckBusiness
         /// <param name="jeu">Le jeu à modifier.</param>
         public void UpdateJeu(JeuDto jeu)
         {
-            Task.Run(() => UpdateJeu(jeu)).Wait();
+            Task.Run(() => UpdateJeuAsync(jeu)).Wait();
         }
 
         /// <summary>
