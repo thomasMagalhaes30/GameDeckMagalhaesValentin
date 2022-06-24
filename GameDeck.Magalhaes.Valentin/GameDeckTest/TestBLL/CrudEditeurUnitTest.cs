@@ -15,7 +15,7 @@ namespace GameDeckTest.TestBLL
         public void GetAllEditeurs()
         {
             IManager monManager = Manager.GetInstance();
-            var result = monManager.GetAllEditeurs();
+            List<EditeurDto> result = monManager.GetAllEditeurs();
 
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(List<EditeurDto>));
@@ -24,26 +24,66 @@ namespace GameDeckTest.TestBLL
         [TestMethod]
         public void GetOneEditeur()
         {
-            Assert.IsTrue(false);
+            // Ajout, get, delete
+            IManager monManager = Manager.GetInstance();
+            EditeurDto dto = new EditeurDto { Nom = "Bugisoft" };
+            int result = monManager.AddEditeur(dto);
+
+            EditeurDto one = monManager.GetOneEditeur(result);
+            Assert.IsNotNull(one);
+            Assert.IsInstanceOfType(one, typeof(EditeurDto));
+            Assert.AreEqual(one.Nom, dto.Nom);
+
+            monManager.DeleteEditeur(result);
         }
 
         [TestMethod]
         public void AddEditeur()
         {
-            var addItem = new EditeurDto { Nom = "Ubisoft" };
-            Assert.IsTrue(false);
+            // Ajout, get, delete
+            IManager monManager = Manager.GetInstance();
+            EditeurDto dto = new EditeurDto { Nom = "Bugisoft" };
+
+            int result = monManager.AddEditeur(dto);
+            EditeurDto one = monManager.GetOneEditeur(result);
+            Assert.IsNotNull(one);
+            Assert.IsInstanceOfType(one, typeof(EditeurDto));
+            Assert.AreEqual(one.Nom, dto.Nom);
+
+            monManager.DeleteEditeur(result);
         }
 
         [TestMethod]
         public void UpdateEditeur()
         {
-            Assert.IsTrue(false);
+            // Ajout, upate, get, delete
+            IManager monManager = Manager.GetInstance();
+            EditeurDto dto = new EditeurDto { Nom = "Bugisoft" };
+            int result = monManager.AddEditeur(dto);
+
+            dto.Id = result;
+            dto.Nom = "nitendort";
+            monManager.UpdateEditeur(dto);
+
+            EditeurDto one = monManager.GetOneEditeur(result);
+            Assert.IsNotNull(one);
+            Assert.IsInstanceOfType(one, typeof(EditeurDto));
+            Assert.AreEqual(one.Nom, "nitendort");
+
+            monManager.DeleteEditeur(result);
         }
 
         [TestMethod]
         public void DeleteEditeur()
         {
-            Assert.IsTrue(false);
+            // Ajout, get, delete
+            IManager monManager = Manager.GetInstance();
+            EditeurDto dto = new EditeurDto { Nom = "Bugisoft" };
+            int result = monManager.AddEditeur(dto);
+            monManager.DeleteEditeur(result);
+
+            EditeurDto one = monManager.GetOneEditeur(result);
+            Assert.IsNull(one);
         }
     }
 }

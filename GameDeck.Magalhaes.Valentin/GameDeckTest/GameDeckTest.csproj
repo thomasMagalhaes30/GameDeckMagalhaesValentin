@@ -57,7 +57,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestBLL\TrueUnitTest.cs" />
     <Compile Include="TestBLL\CrudEditeurUnitTest.cs" />
     <Compile Include="TrueUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
