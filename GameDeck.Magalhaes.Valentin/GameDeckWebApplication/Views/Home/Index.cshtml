@@ -7,7 +7,7 @@
 <h1>GameDeck, les jeux en fête !</h1>
 
 
-<h2>Les dernières évaluations ajoutées</h2>
+<h2 class="mt-3">Les dernières évaluations ajoutées</h2>
 <div id="last-evaluations">
     <div class="d-inline-block">
         @Html.CustomLoading()
@@ -15,7 +15,7 @@
 </div>
 
 
-<h2>Les jeux les mieux notés</h2>
+<h2 class="mt-3">Les jeux les mieux notés</h2>
 <div id="best-games">
     <div class="d-inline-block" >
         @Html.CustomLoading()
@@ -24,7 +24,7 @@
 
   
 <script type="text/javascript">
-    // charge le contenu du'n appel ajax dans un div
+    // charge le contenu de l'appel ajax dans un div
     function loadUrlInDiv(url, divId) {
         $.ajax({
             url: url,
