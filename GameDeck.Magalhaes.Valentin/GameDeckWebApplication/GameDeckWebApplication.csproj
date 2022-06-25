@@ -140,6 +140,7 @@
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\EditeurController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IllegalArguentExcption.cs" />
     <Compile Include="Controllers\JeuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -245,6 +246,7 @@
     <Content Include="Views\Jeu\_List.cshtml" />
     <Content Include="Views\Evaluation\_List.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\EvaluationVm.cshtml" />
+    <Content Include="Views\Shared\Evaluation\_ListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,7 +9,7 @@
 <div class="mx-auto mt-5 w-75 align-self-center align-items-center justify-content-center">
     <div class="justify-content-center text-center">
         <h1>@title</h1>
-        <p>Sortie le <b class="text-primary" >@Model.DateSortie.ToString("dd/MM/yyyy")</b></p>
+        <p>Sortie le <b class="text-primary">@Model.DateSortie.ToString("dd/MM/yyyy")</b></p>
     </div>
     <div class="d-flex flex-row justify-content-center text-start gap-2">
         <div class="d-flex flex-column align-items-stretch gap-2">
@@ -38,41 +38,66 @@
     <div class="mx-auto mt-2">
         <div class="d-flex flex-row mx-2 gap-2">
             <p class="m-0">Evaluations</p>
-            @if (Model.Evaluations != null) 
-            {
-                <b class="m-0 ms-auto text-primary">@Model.Evaluations.Select(e => e.Note).Average().ToString("0.##")</b>
-            }
+            <input id="nb-evals" type="hidden" value="@(Model.Evaluations?.Count ?? 0)" />
+            @*@if (Model.Evaluations != null)
+            {*@
+                <b id="average-mark" class="m-0 ms-auto text-primary">@((Model.Evaluations?.Select(e => e.Note)?.Average() ?? 0).ToString("0.##"))</b>
+            @*}*@
         </div>
 
-        <div class="d-flex flex-row my-2 gap-2">
-            <input type="text" placeholder="Nom"/>
-            <input type="range" min="0" max="20" step="0.5" value="10" oninput="this.nextElementSibling.value = Number(this.value).toFixed(2)"/>
+        <div class="d-flex flex-wrap my-2 gap-2">
+            <input id="nom_input" type="text" placeholder="Nom" />
+            <input id="note_input" type="range" min="0" max="20" step="0.5" value="10" oninput="this.nextElementSibling.value = Number(this.value).toFixed(2)" />
             <output>10.00</output>
-            <input class="ms-auto" type="submit" value="Envoyer !"/>
+            <button class="btn btn-primary ms-auto" type="button" onclick="postEvaluation()">Envoyer !</button>
         </div>
-        <div class="border border-dark rounded-2 m-0">
+        <div id="evaluation_stack" class="border border-dark rounded-2 m-0">
             @if (Model.Evaluations != null)
             {
-                foreach (EvaluationVM eval in Model.Evaluations)
+                foreach (EvaluationVM eval in Model.Evaluations.OrderByDescending(e => e.Date))
                 {
-                    <div class="d-flex flex-row border-bottom border-primary mt-1 m-2 p-1">
-                        <div>
-                            <p class="m-0">@eval.NomEvaluateur</p>
-                            <p class="m-0" style="font-size:smaller">@eval.Date.ToString("dd/MM/yyyy")</p>
-                        </div>
-                        <p class="m-0 ms-auto">@eval.Note.ToString("0.##")</p>
-                    </div>
+                    @Html.Partial("Evaluation/_ListItem", eval)
                 }
             }
             else
             {
-                <div class="container-fluid p-0 overflow-scroll">
+                <div id="empty_list" class="container-fluid p-0 overflow-scroll">
                     <div class="position-sticky start-0 end-0 top-0 bottom-50 mt-5">
                         <p class="fs-1 text-center rainbow-text text-wrap w-50 mx-auto my-0">Il n'y a rien à voir ici...</p>
                     </div>
-                    <img class="w-auto" src="~/Content/david_goodenough.png" alt="c pt"/>
+                    <img class="w-auto" src="~/Content/david_goodenough.png" alt="c pt" />
                 </div>
             }
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function postEvaluation() {
+        $.ajax({
+            url: "@Url.Action("SendEvaluation", "Jeu")",
+            method: "POST",
+            data: {
+                'jeuId': "@Model.Id",
+                'nom': $('#nom_input').val(),
+                'note': $('#note_input').val().replace('.', ',')
+            }
+        })
+        .done(function (response) {
+
+            let nb = @(Model.Evaluations?.Count ?? 0);
+            let av = parseFloat($('#average-mark').text().replace(',', '.'));
+            let note = parseFloat($('#note_input').val());
+
+            $('#empty_list').hide();
+
+            $('#evaluation_stack').prepend(response);
+            $('#average-mark').text(Number((av * nb + note) / (nb + 1)).toFixed(2).replace('.', ','));
+            $('#nb-evals').val(nb + 1);
+        })
+        //.fail(function (error) {
+        //    console.log(error);
+        //    $(`#${divId}`).empty().append("<p class='fs-5 fw-bold text-danger'>Une erreur est survenu</p>");
+        //})
+    }
+</script>
