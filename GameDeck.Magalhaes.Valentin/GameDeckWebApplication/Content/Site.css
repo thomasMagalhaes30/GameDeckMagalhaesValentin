@@ -28,3 +28,10 @@ textarea {
     width: 200px;
     height: 200px;
 }
+
+.rainbow-text {
+    /*background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);*/
+    background-image: linear-gradient(to left, yellow, red, blue, green);
+    -webkit-background-clip: text;
+    color: transparent;
+}

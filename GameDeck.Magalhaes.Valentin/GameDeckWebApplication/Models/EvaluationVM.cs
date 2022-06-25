@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace GameDeckWebApplication.Models
 {
@@ -10,6 +11,7 @@ namespace GameDeckWebApplication.Models
         /// <summary>
         /// Obtient ou definit l'identifiant de l'<see cref="EvaluationVM"/>.
         /// </summary>
+        [Range(1, int.MaxValue)]
         public int Id { get; set; }
 
         /// <summary>
@@ -25,6 +27,7 @@ namespace GameDeckWebApplication.Models
         /// <summary>
         /// Obtient ou definit la note de l'<see cref="EvaluationVM"/>.
         /// </summary>
+        [Range(0, 20)]
         public float Note { get; set; }
 
         /// <summary>
