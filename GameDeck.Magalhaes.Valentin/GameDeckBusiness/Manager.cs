@@ -271,6 +271,31 @@ namespace GameDeckBusiness
             }
         }
 
+        /// <summary>
+        /// Obtient une liste de <see cref="EvaluationDto"/> les plus récentes.
+        /// </summary>
+        /// <param name="nbItem">nombre d'item a recupérer.</param>
+        /// <returns>Une liste de <see cref="EvaluationDto"/> les plus récentes.</returns>
+        public List<EvaluationDto> LastEvaluation(int nbItem)
+        {
+            return Task.Run(() => LastEvaluationAsync(nbItem)).Result;
+        }
+
+        /// <summary>
+        /// Obtient une liste de <see cref="EvaluationDto"/> les plus récentes.
+        /// </summary>
+        /// <param name="nbItem">nombre d'item a recupérer.</param>
+        /// <returns>Une liste de <see cref="EvaluationDto"/> les plus récentes.</returns>
+        public async Task<List<EvaluationDto>> LastEvaluationAsync(int nbItem)
+        {
+            using (var context = new Context())
+            {
+                return EvaluationConverter.ConvertToDto(
+                    await new EvaluationQuery(context).GetAll().OrderByDescending(e => e.Date).ThenBy(e => e.Id).Take(nbItem).ToListAsync()
+                );
+            }
+        }
+
         #endregion
 
         #region methods Experience
@@ -710,7 +735,7 @@ namespace GameDeckBusiness
             using (var context = new Context())
             {
                 return JeuConverter.ConvertToDto(
-                    await new JeuQuery(context).GetAll().Include(j => j.Evaluations).OrderByDescending(jeu => jeu.Evaluations.Average(e => e.Note)).Take(nbItem).ToListAsync()
+                    await new JeuQuery(context).GetAll().Include(j => j.Evaluations).OrderByDescending(jeu => jeu.Evaluations.Average(e => e.Note)).ThenBy(e => e.Id).Take(nbItem).ToListAsync()
                 );
             }
         }

@@ -4,11 +4,13 @@
     @*<img class="card-img-top" src="img_avatar1.png" alt="Card image">*@
     <div class="card-body">
         <h4 class="card-title text-center">@Html.DisplayFor(model => model.Nom)</h4>
-        <span>@Model.DateSortie.ToString("dd/MM/yyyy")</span>
-        <p class="card-text">@Model.Description</p>
-
-        @Html.ActionLink("Detail", "Detail", new { id = Model.Id }, new { @class = "btn btn-primary w-100" })
-        @Html.ActionLink("Editer", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary w-100" })
+        <span class="text-primary fw-bold">@Model.DateSortie.ToString("dd/MM/yyyy")</span>
+        <p class="card-text description-game-card" style="max-height: 100px">@Model.Description</p>
+       
+    </div>
+    <div class="card-footer">
+        @Html.ActionLink("Detail", "Detail", new { id = Model.Id }, new { @class = "btn btn-primary w-100 mb-1" })
+        @Html.ActionLink("Editer", "Edit", new { id = Model.Id }, new { @class = "btn btn-secondary w-100 mb-1" })
     </div>
 </div>
 

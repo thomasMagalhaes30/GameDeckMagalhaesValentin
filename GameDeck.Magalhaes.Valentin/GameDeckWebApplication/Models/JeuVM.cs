@@ -32,6 +32,7 @@ namespace GameDeckWebApplication.Models
         /// </summary>
         [DisplayName("Date de sortie")]
         [Required(ErrorMessage = "La date de sorti du jeu est obligatoire.")]
+        [Range(typeof(DateTime), "1/1/1970", "31/12/9999", ErrorMessage = "Le champ {0} doit être compris {1:MM/dd/yyyy} et {2:MM/dd/yyyy}")]
         public DateTime DateSortie { get; set; }
 
         /// <summary>

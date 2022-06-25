@@ -1,0 +1,10 @@
+﻿@model GameDeckWebApplication.Models.EvaluationVM
+
+<div class="card mb-1" style="width:300px">
+    <div class="card-body">
+        <h4 class="card-title text-center">@Html.DisplayFor(model => model.NomEvaluateur)</h4>
+        <span class="text-primary fw-bold">@Model.Note</span>
+        <p class="card-text description-game-card" style="max-height: 100px">@Model.Date</p>
+    </div>
+</div>
+

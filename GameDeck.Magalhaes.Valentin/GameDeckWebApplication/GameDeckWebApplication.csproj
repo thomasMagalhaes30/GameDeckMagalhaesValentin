@@ -136,6 +136,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EvaluationController.cs" />
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\EditeurController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -241,6 +242,9 @@
     <Content Include="Views\Shared\EditorTemplates\JeuVM.cshtml" />
     <Content Include="Views\Jeu\Search.cshtml" />
     <Content Include="Views\Jeu\Detail.cshtml" />
+    <Content Include="Views\Jeu\_List.cshtml" />
+    <Content Include="Views\Evaluation\_List.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EvaluationVm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
