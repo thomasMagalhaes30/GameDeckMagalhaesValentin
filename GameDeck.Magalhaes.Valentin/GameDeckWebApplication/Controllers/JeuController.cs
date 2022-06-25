@@ -30,6 +30,7 @@ namespace GameDeckWebApplication.Controllers
         public ActionResult Edit(int? id)
         {
             JeuDto dto = new JeuDto();
+            dto.DateSortie = System.DateTime.Today;
             if (id.HasValue)
             {
                 dto = Manager.GetInstance().GetOneJeu(id.Value);
