@@ -35,7 +35,7 @@ namespace GameDeckWebApplication.Controllers
                 dto = Manager.GetInstance().GetOneJeu(id.Value);
             }
 
-            // on remplit les view bag qui seront utilisés dans les dropdown
+            // on remplit les view bag/ view data qui seront utilisés dans les dropdown
             IEnumerable<SelectListItem> lesEditeurs = Manager.GetInstance().GetAllEditeurs().Select(edi => new SelectListItem {
                 Value = edi.Id.ToString(),
                 Text = edi.Nom,
@@ -72,7 +72,6 @@ namespace GameDeckWebApplication.Controllers
             {
                 vm.Id = Manager.GetInstance().AddJeu(JeuAdapter.ConvertToDto(vm));
             }
-
             
             return Redirect(vm.PreviousUrl ?? "/");
         }
