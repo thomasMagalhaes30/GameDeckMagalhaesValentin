@@ -28,3 +28,13 @@ textarea {
     width: 200px;
     height: 200px;
 }
+
+.description-game-card {
+    overflow: hidden;
+    max-height: 8rem;
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+}
