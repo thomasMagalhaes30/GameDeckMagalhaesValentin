@@ -147,6 +147,20 @@ namespace GameDeckBusiness
         /// <param name="id">Identifiant de l'evaluation à supprimer.</param>
         Task DeleteEvaluationAsync(int id);
 
+        /// <summary>
+        /// Obtient une liste de <see cref="EvaluationDto"/> les plus récentes.
+        /// </summary>
+        /// <param name="nbItem">nombre d'item a recupérer.</param>
+        /// <returns>Une liste de <see cref="EvaluationDto"/> les plus récentes.</returns>
+        List<EvaluationDto> LastEvaluation(int nbItem);
+
+        /// <summary>
+        /// Obtient une liste de <see cref="EvaluationDto"/> les plus récentes.
+        /// </summary>
+        /// <param name="nbItem">nombre d'item a recupérer.</param>
+        /// <returns>Une liste de <see cref="EvaluationDto"/> les plus récentes.</returns>
+        Task<List<EvaluationDto>> LastEvaluationAsync(int nbItem);
+
         #endregion
 
         #region methods Experience
@@ -373,7 +387,6 @@ namespace GameDeckBusiness
         /// <param name="nbItem">nombre d'item a recupérer.</param>
         /// <returns>Une liste de <see cref="JeuDto"/> ayant les meilleurs notes.</returns>
         List<JeuDto> TopJeuxByMark(int nbItem);
-
 
         /// <summary>
         /// Obtient une liste de <see cref="JeuDto"/> ayant les meilleurs notes.

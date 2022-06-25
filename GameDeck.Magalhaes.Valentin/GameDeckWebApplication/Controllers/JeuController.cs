@@ -4,6 +4,7 @@ using GameDeckWebApplication.Models;
 using GameDeckWebApplication.Models.Converters;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace GameDeckWebApplication.Controllers
@@ -85,6 +86,12 @@ namespace GameDeckWebApplication.Controllers
             }
             List<JeuDto> dtos = Manager.GetInstance().FindJeuxByName(searchText);
             return View(JeuAdapter.ConvertToVM(dtos));
+        }
+
+        public async Task<ActionResult> BestGames(int nbGames = 5)
+        {
+            List<JeuDto> dtos = await Manager.GetInstance().TopJeuxByMarkAsync(nbGames);
+            return PartialView("_List", JeuAdapter.ConvertToVM(dtos));
         }
     }
 }
