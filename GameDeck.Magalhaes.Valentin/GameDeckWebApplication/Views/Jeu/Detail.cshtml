@@ -37,7 +37,7 @@
 
     <div class="mx-auto mt-2">
         <div class="d-flex flex-row mx-2 gap-2">
-            <p class="m-0">Evaluations</p>
+            <p class="m-0">Moyenne des evaluations</p>
             <input id="nb-evals" type="hidden" value="@(Model.Evaluations?.Count ?? 0)" />
             @*@if (Model.Evaluations != null)
             {*@
@@ -46,8 +46,8 @@
         </div>
 
         <div class="d-flex flex-wrap my-2 gap-2">
-            <input id="nom_input" type="text" placeholder="Nom" />
-            <input id="note_input" type="range" min="0" max="20" step="0.5" value="10" oninput="this.nextElementSibling.value = Number(this.value).toFixed(2)" />
+            <input id="nom-input" type="text" placeholder="Nom" />
+            <input id="note-input" type="range" min="0" max="20" step="0.5" value="10" oninput="this.nextElementSibling.value = Number(this.value).toFixed(2)" />
             <output>10.00</output>
             <button class="btn btn-primary ms-auto" type="button" onclick="postEvaluation()">Envoyer !</button>
         </div>
@@ -78,22 +78,21 @@
             url: "@Url.Action("SendEvaluation", "Jeu")",
             method: "POST",
             data: {
-                'jeuId': "@Model.Id",
-                'nom': $('#nom_input').val(),
-                'note': $('#note_input').val().replace('.', ',')
+                'jeuId': @Model.Id,
+                'nom': $('#nom-input').val(),
+                'note': $('#note-input').val().replace('.', ',')
             }
         })
         .done(function (response) {
-
-            let nb = @(Model.Evaluations?.Count ?? 0);
+            let nbEvals = parseInt($('#nb-evals').val());
             let av = parseFloat($('#average-mark').text().replace(',', '.'));
-            let note = parseFloat($('#note_input').val());
+            let note = parseFloat($('#note-input').val());
 
             $('#empty_list').hide();
 
             $('#evaluation_stack').prepend(response);
-            $('#average-mark').text(Number((av * nb + note) / (nb + 1)).toFixed(2).replace('.', ','));
-            $('#nb-evals').val(nb + 1);
+            $('#average-mark').text(Number((av * nbEvals + note) / (nbEvals + 1)).toFixed(2).replace('.', ','));
+            $('#nb-evals').val(nbEvals + 1);
         })
         //.fail(function (error) {
         //    console.log(error);

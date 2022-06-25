@@ -140,7 +140,6 @@
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\EditeurController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IllegalArguentExcption.cs" />
     <Compile Include="Controllers\JeuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
