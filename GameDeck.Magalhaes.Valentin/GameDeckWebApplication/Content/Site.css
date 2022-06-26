@@ -1,0 +1,172 @@
+﻿body {
+    padding-top: 56px;
+    /*padding-bottom: 20px;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.pp-github {
+    border: 1px solid #808080;
+    width: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px;
+}
+
+.description-game-card {
+    overflow: hidden;
+    max-height: 8rem;
+    -webkit-box-orient: vertical;
+    display: block;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+}
+
+
+/*
+    spinner
+*/
+.fidget {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0) scale(2);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg) scale(2);
+    }
+}
+
+.end, .center {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: tomato;
+}
+
+.end:after, .center:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: #333;
+    content: '';
+}
+
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.end {
+    z-index: 2;
+}
+
+.end:nth-child(1) {
+    top: 5px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.end:nth-child(2) {
+    bottom: 25px;
+    right: 15px;
+}
+
+.end:nth-child(3) {
+    bottom: 25px;
+    left: 15px;
+}
+
+.gap {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: tomato;
+    z-index: 1;
+}
+
+.gap:after {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #333;
+    content: '';
+}
+
+.gap:nth-child(5) {
+    top: 35px;
+    left: 26px;
+    transform: rotate(-21deg);
+}
+
+.gap:nth-child(5):after {
+    top: -15px;
+    left: -15px;
+}
+
+.gap:nth-child(6) {
+    top: 35px;
+    right: 26px;
+    transform: rotate(21deg);
+}
+
+.gap:nth-child(6):after {
+    top: -15px;
+    right: -15px;
+}
+
+.gap:nth-child(7) {
+    bottom: 9px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.gap:nth-child(7):after {
+    bottom: -15px;
+}
+
+.rainbow-text {
+    /*background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);*/
+    background-image: linear-gradient(to left, yellow, red, blue, green);
+    -webkit-background-clip: text;
+    color: transparent;
+}

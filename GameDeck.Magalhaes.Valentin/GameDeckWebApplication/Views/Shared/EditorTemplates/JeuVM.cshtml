@@ -1,0 +1,70 @@
+﻿@using GameDeckWebApplication.Models.Extentions;
+
+@model GameDeckWebApplication.Models.JeuVM
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <form>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.PreviousUrl)
+
+        <div class="mb-3 row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Nom, new { @class = "form-label" })
+            </div>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.DateSortie, new { @class = "form-label" })
+            </div>
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.DateSortie, new { @type = "date", @class = "form-control datepicker", @Value = Model.DateSortie.ToString("yyyy-MM-dd") })
+                @Html.ValidationMessageFor(model => model.DateSortie, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.Description, new { @class = "form-label" })
+            </div>
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "10" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.GenreId, new { @class = "form-label" })
+            </div>
+            <div class="col-md-8">
+                @Html.DropDownList(nameof(Model.GenreId), (SelectList)ViewData["Genres"], new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.EditeurId, new { @class = "form-label" })
+            </div>
+            <div class="col-md-8">
+                @Html.DropDownList(nameof(Model.EditeurId), (SelectList)ViewData["Editeurs"], new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.EditeurId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+}

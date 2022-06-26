@@ -1,0 +1,70 @@
+﻿@using GameDeckWebApplication.Models.Extentions;
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - GameDeck</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body class="min-vh-100 d-flex flex-column">
+    <nav class="navbar navbar-expand-lg bg-dark fixed-top navbar-dark">
+        <div class="container-fluid">
+            @Html.ActionLink("🎮 GameDeck", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link @Html.IsActive("Index", "Editeur")" href="@Url.Action("Index", "Editeur")">Éditeurs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @Html.IsActive("Index", "Jeu")" href="@Url.Action("Index", "Jeu")">Jeux</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @Html.IsActive("Contact", "Home")" href="@Url.Action("Contact", "Home")">Contact</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search" id="search" onkeypress="SearchKeyPress()">
+                    <button class="btn btn-outline-success" type="button" onclick="SearchJeu()">Rechercher</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="body-content">
+        @RenderBody()
+    </div>
+
+    <footer class="mt-auto">
+        <hr/>
+        <p class="text-center">&copy; @DateTime.Now.Year - Mon application ASP.NET fait avec 💙 par Guillaume & Thomas</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+        function SearchKeyPress()
+        {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                SearchJeu();
+            }
+        }
+
+        function SearchJeu()
+        {
+            $(location).attr('href', `@Url.Action("Search", "Jeu")?search=${$('#search').val()}`);
+        }
+    </script>
+
+</body>
+</html>

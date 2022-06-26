@@ -1,24 +1,56 @@
 ﻿using Modele.Entities;
 using Modele.Mappings;
+using System;
 using System.Data.Entity;
-using System.Reflection;
 
 namespace Modele
 {
-    public class Context : DbContext
+    /// <summary>
+    /// Représente le contexte EF héritant de la classe DbContext.
+    /// </summary>
+    public class Context : DbContext, IDisposable
     {
         public Context() : base("name=ConnexionString")
         {
             // A remplacer par DropCreateDatabaseIfModelChanges puis par null
-            Database.SetInitializer(new DropCreateDatabaseAlways<Context>());
+            //Database.SetInitializer<Context>(new DropCreateDatabaseAlways<Context>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<Context>());
         }
 
+        public new void Dispose()
+        {
+            Dispose(true);
+        }
+
+        /// <summary>
+        /// Les editeurs.
+        /// </summary>
         public DbSet<Editeur> Editeurs { get; set; }
+
+        /// <summary>
+        /// Les evaluations.
+        /// </summary>
         public DbSet<Evaluation> Evaluations { get; set; }
+
+        /// <summary>
+        /// Les experiences.
+        /// </summary>
         public DbSet<Experience> Experiences { get; set; }
+
+        /// <summary>
+        /// Les genres.
+        /// </summary>
         public DbSet<Genre> Genres { get; set; }
+
+        /// <summary>
+        /// Les jeux.
+        /// </summary>
         public DbSet<Jeu> Jeux { get; set; }
 
+        /// <summary>
+        /// Surcharge du OnModelCreating pour ajouter la configuration Fluent.
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

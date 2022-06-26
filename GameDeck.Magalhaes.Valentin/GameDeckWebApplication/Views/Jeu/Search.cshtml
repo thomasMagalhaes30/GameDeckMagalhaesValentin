@@ -1,0 +1,23 @@
+﻿@using GameDeckWebApplication.Models
+
+@model List<JeuVM>
+
+@{
+    int nbResult = Model == null ? 0 : Model.Count;
+    ViewBag.Title = "Les jeux";
+}
+
+<h1>Les jeux par recherche</h1>
+
+@if (nbResult == 0)
+{
+    <h4>Aucun résultat pour la recherche</h4>
+}
+else
+{
+    <p>@nbResult resultat@(nbResult>1?"s":"")</p>
+
+    @Html.Partial("_List", Model)
+}
+
+

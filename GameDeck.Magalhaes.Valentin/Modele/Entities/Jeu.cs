@@ -6,13 +6,8 @@ namespace Modele.Entities
     /// <summary>
     /// Represente un <see cref="Jeu"/> (APP_JEU).
     /// </summary>
-    public class Jeu
+    public class Jeu : BaseEntity
     {
-        /// <summary>
-        /// Obtient ou definit l'identifiant du <see cref="Jeu"/>.
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Obtient ou definit le nom du <see cref="Jeu"/>.
         /// </summary>
@@ -46,16 +41,16 @@ namespace Modele.Entities
         /// <summary>
         /// Obtient ou definit le <see cref=Genre"/> du <see cref="Jeu"/>.
         /// </summary>
-        public Genre GenreObj { get; set; }
+        public virtual Genre GenreObj { get; set; }
 
         /// <summary>
         /// Obtient ou definit la liste de <see cref="Evaluation"/> du <see cref="Jeu"/>.
         /// </summary>
-        public ICollection<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
+        public virtual ICollection<Evaluation> Evaluations { get; set; } = new List<Evaluation>();
 
         /// <summary>
         /// Obtient ou definit la liste de <see cref="Experience"/> du <see cref="Jeu"/>.
         /// </summary>
-        public ICollection<Experience> Experiences { get; set; } = new List<Experience>();
+        public virtual ICollection<Experience> Experiences { get; set; } = new List<Experience>();
     }
 }

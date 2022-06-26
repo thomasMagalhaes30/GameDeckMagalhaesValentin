@@ -49,7 +49,7 @@ namespace Modele.Mappings
 
             HasRequired(j => j.GenreObj)
                 .WithMany(g => g.Jeux)
-                .HasForeignKey(j => j.GenreId); 
+                .HasForeignKey(j => j.GenreId);
 
             #endregion
         }

@@ -1,0 +1,102 @@
+﻿@using GameDeckWebApplication.Models
+
+
+@model JeuVM
+
+@{ string title = $"{Model?.Nom}";
+    ViewBag.Title = $"Détail " + title; }
+
+<div class="mx-auto mt-5 w-75 align-self-center align-items-center justify-content-center">
+    <div class="justify-content-center text-center">
+        <h1>@title</h1>
+        <p>Sortie le <b class="text-primary">@Model.DateSortie.ToString("dd/MM/yyyy")</b></p>
+    </div>
+    <div class="d-flex flex-row justify-content-center text-start gap-2">
+        <div class="d-flex flex-column align-items-stretch gap-2">
+            <p class="m-0">Editeur</p>
+            <p class="m-0">Catégorie</p>
+        </div>
+        <div class="d-flex flex-column align-items-stretch text-primary gap-2">
+            <b class="m-0">@Model.EditeurObj.Nom</b>
+            <b class="m-0">@Model.GenreObj.Nom</b>
+        </div>
+    </div>
+    <div class="mt-2">
+        <p class="my-0 mx-2">Description</p>
+        <div class="border border-primary rounded-2 p-2 bg-primary bg-opacity-25">
+            <p>@Model.Description</p>
+        </div>
+    </div>
+    @if (Model.Experiences != null)
+    {
+        <div class="d-flex flex-row mx-2 mt-2 pb-2 border-bottom border-primary gap-2">
+            <p class="m-0">Temps de jeu moyen</p>
+            <b class="m-0 ms-auto text-primary flex-nowrap">@Model.Experiences.Select(e => (e.TempsJeu.TotalSeconds / 3600)).Average().ToString("0.##") h</b>
+        </div>
+    }
+
+    <div class="mx-auto mt-2">
+        <div class="d-flex flex-row mx-2 gap-2">
+            <p class="m-0">Moyenne des evaluations</p>
+            <input id="nb-evals" type="hidden" value="@(Model.Evaluations?.Count ?? 0)" />
+            @*@if (Model.Evaluations != null)
+            {*@
+                <b id="average-mark" class="m-0 ms-auto text-primary">@((Model.Evaluations?.Select(e => e.Note)?.Average() ?? 0).ToString("0.##"))</b>
+            @*}*@
+        </div>
+
+        <div class="d-flex flex-wrap my-2 gap-2">
+            <input id="nom-input" type="text" placeholder="Nom" />
+            <input id="note-input" type="range" min="0" max="20" step="0.5" value="10" oninput="this.nextElementSibling.value = Number(this.value).toFixed(2)" />
+            <output>10.00</output>
+            <button class="btn btn-primary ms-auto" type="button" onclick="postEvaluation()">Envoyer !</button>
+        </div>
+        <div id="evaluation_stack" class="border border-dark rounded-2 m-0">
+            @if (Model.Evaluations != null)
+            {
+                foreach (EvaluationVM eval in Model.Evaluations.OrderByDescending(e => e.Date))
+                {
+                    @Html.Partial("Evaluation/_ListItem", eval)
+                }
+            }
+            else
+            {
+                <div id="empty_list" class="container-fluid p-0 overflow-scroll">
+                    <div class="position-sticky start-0 end-0 top-0 bottom-50 mt-5">
+                        <p class="fs-1 text-center rainbow-text text-wrap w-50 mx-auto my-0">Il n'y a rien à voir ici...</p>
+                    </div>
+                    <img class="w-auto" src="~/Content/david_goodenough.png" alt="c pt" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function postEvaluation() {
+        $.ajax({
+            url: "@Url.Action("SendEvaluation", "Jeu")",
+            method: "POST",
+            data: {
+                'jeuId': @Model.Id,
+                'nom': $('#nom-input').val(),
+                'note': $('#note-input').val().replace('.', ',')
+            }
+        })
+        .done(function (response) {
+            let nbEvals = parseInt($('#nb-evals').val());
+            let av = parseFloat($('#average-mark').text().replace(',', '.'));
+            let note = parseFloat($('#note-input').val());
+
+            $('#empty_list').hide();
+
+            $('#evaluation_stack').prepend(response);
+            $('#average-mark').text(Number((av * nbEvals + note) / (nbEvals + 1)).toFixed(2).replace('.', ','));
+            $('#nb-evals').val(nbEvals + 1);
+        })
+        //.fail(function (error) {
+        //    console.log(error);
+        //    $(`#${divId}`).empty().append("<p class='fs-5 fw-bold text-danger'>Une erreur est survenu</p>");
+        //})
+    }
+</script>

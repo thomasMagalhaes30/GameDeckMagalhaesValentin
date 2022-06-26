@@ -10,12 +10,10 @@ using System.Threading.Tasks;
 namespace GameDeckBusiness.Queries
 {
     /// <summary>
-    /// 
+    /// Represente la classe de requête du <see cref="Jeu"/>.
     /// </summary>
     internal class JeuQuery : BaseQuery<Jeu>
     {
         public JeuQuery(Context context) : base(context) { }
-
-        public new void Add(Jeu jeu) => base.Add(jeu);
     }
 }

@@ -1,0 +1,17 @@
+﻿@using GameDeckWebApplication.Models
+
+@model List<EditeurVM>
+
+@{
+    ViewBag.Title = "Les éditeurs";
+}
+
+<h1>Les éditeurs</h1>
+
+@Html.ActionLink("Ajouter un éditeur", "Edit", null, new { @class = "btn btn-primary w-100" })
+
+<div class="d-flex flex-wrap justify-content-evenly mt-2">
+    @Html.DisplayForModel(Model)
+</div>
+
+

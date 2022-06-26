@@ -1,0 +1,11 @@
+﻿@using GameDeckWebApplication.Models
+
+@model EvaluationVM
+
+<div class="d-flex flex-row border-bottom border-primary mt-1 m-2 p-1">
+    <div>
+        <p class="m-0">@Model.NomEvaluateur</p>
+        <p class="m-0" style="font-size:smaller">@Model.Date.ToString("dd/MM/yyyy")</p>
+    </div>
+    <p class="m-0 ms-auto">@Model.Note.ToString("0.##")</p>
+</div>

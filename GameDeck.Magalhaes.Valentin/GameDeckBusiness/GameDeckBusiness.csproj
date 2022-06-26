@@ -51,12 +51,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\EvaluationCommand.cs" />
+    <Compile Include="Commands\EditeurCommand.cs" />
+    <Compile Include="Commands\ExperienceCommand.cs" />
+    <Compile Include="Commands\JeuCommand.cs" />
+    <Compile Include="Commands\GenreCommand.cs" />
+    <Compile Include="Converters\EvaluationConverter.cs" />
+    <Compile Include="Converters\ExperienceConverter.cs" />
+    <Compile Include="Converters\JeuConverter.cs" />
+    <Compile Include="Converters\GenreConverter.cs" />
+    <Compile Include="Converters\EditeurConverter.cs" />
+    <Compile Include="IManager.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\BaseQuery.cs" />
+    <Compile Include="Queries\EvaluationQuery.cs" />
+    <Compile Include="Queries\EditeurQuery.cs" />
+    <Compile Include="Queries\ExperienceQuery.cs" />
+    <Compile Include="Queries\GenreQuery.cs" />
     <Compile Include="Queries\JeuQuery.cs" />
+    <Compile Include="Util\ManagerUtil.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameDeckDto\GameDeckDto.csproj">
+      <Project>{9C8FEDB2-58F4-4E9C-B83B-D8BA88F39DDE}</Project>
+      <Name>GameDeckDto</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modele\Modele.csproj">
       <Project>{4367ce00-0f8a-4199-89af-cd00d53b34c2}</Project>
       <Name>Modele</Name>
@@ -65,9 +86,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
