@@ -10,6 +10,7 @@
         <converter:BoolToReverteBoolConverter x:Key="RevertBool"/>
         <converter:StringToDateConverter x:Key="StringToDate"/>
         <converter:DateToStringConverter x:Key="DateToString"/>
+        <converter:MultiBindingConverter x:Key="MultiBinding"/>
 
         <Style TargetType="Border">
             <Setter Property="CornerRadius" Value="2"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace GameDeckWpf.ViewModel
 {
@@ -121,7 +122,8 @@ namespace GameDeckWpf.ViewModel
             get => _evaluations ?? (_evaluations = new ObservableCollection<EvaluationVM>());
             set
             {
-                _evaluations = value; OnPropertyChanged();
+                _evaluations = value; 
+                OnPropertyChanged();
             }
         }
 

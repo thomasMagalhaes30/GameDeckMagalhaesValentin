@@ -21,7 +21,7 @@ namespace GameDeckWpf.Extensions
                 EditeurId = dto.EditeurId,
                 Genre = dto.GenreObj?.ToViewModel(),
                 Editeur = dto.EditeurObj?.ToViewModel(),
-                Evaluations = dto.Evaluations != null ? new ObservableCollection<EvaluationVM>(dto.Evaluations.Select(e => e.ToViewModel())) : null,
+                Evaluations = dto.Evaluations != null ? new ObservableCollection<EvaluationVM>(dto.Evaluations.Select(e => e.ToViewModel()).OrderByDescending(e => e.Date).ThenBy(e => e.NomEvaluateur)) : null,
                 Experiences = dto.Experiences != null ? new ObservableCollection<ExperienceVM>(dto.Experiences.Select(e => e.ToViewModel())) : null
             };
     }
