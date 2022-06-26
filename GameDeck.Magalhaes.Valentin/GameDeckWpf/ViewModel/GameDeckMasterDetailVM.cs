@@ -214,7 +214,7 @@ namespace GameDeckWpf.ViewModel
 
                 if (!string.IsNullOrEmpty(erreurMessage))
                 {
-                    _ = MessageBox.Show("Données manquantes :" + Environment.NewLine + erreurMessage, "Sauvegarde impossible", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    _ = MessageBox.Show("Donnée(s) manquante(s) :" + Environment.NewLine + erreurMessage, "Sauvegarde impossible", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
