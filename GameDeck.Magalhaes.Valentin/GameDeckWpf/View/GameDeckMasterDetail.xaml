@@ -266,7 +266,7 @@
                                 <Label Width="auto" Content="note"/>
                                 <xctk:DecimalUpDown Name="dud_note" MinWidth="125" Minimum="0" Maximum="20" Increment="0.5" Value="10.0"/>
                             </WrapPanel>
-                            <Border DockPanel.Dock="Right">
+                            <Border DockPanel.Dock="Right" Background="LightGray">
                                 <Button BorderThickness="0" Background="Transparent" Content="Ajouter une note" Command="{Binding BtnNote_CMD}">
                                     <Button.CommandParameter>
                                         <MultiBinding Converter="{StaticResource MultiBinding}">
@@ -306,6 +306,7 @@
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
+                                <!-- Image -->
                                 <Grid Visibility="{Binding ElementName=lv_Evaluations, Converter={StaticResource boolToVisibilityRevert}, 
                                     Path=HasItems, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                                     <Label Content="Il n'y a rien à voir ici..." MinWidth="300" FontSize="25"
